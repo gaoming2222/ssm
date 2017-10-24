@@ -1,0 +1,304 @@
+.wrap-menu {
+	overflow-y: auto;
+	min-height: 0px;
+	overflow-x: hidden;
+	width: 100%;
+	background: #E2E5EA;
+	font: 12px/1.5 Tahoma, Arial, sans-serif;
+}
+
+.wrap-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.wrap-menu ul li h2 {;
+	cursor: pointer;
+	margin: 0 0 1px 0;
+	font: 16px/40px Tahoma, Arial, sans-serif;
+	color: #3d3d3d;
+	background: url(images/FirstLevelBg.png) repeat-x;
+	border-bottom: 1px solid #afb7bd;
+}
+
+.wrap-menu ul li h2:hover {
+	color: #4ea0c6;
+	background: url(images/FirstLevelHoverBg.png) repeat-x;
+}
+
+.wrap-menu ul li h2.h2click {
+	color: #810081;
+}
+
+.wrap-menu ul li a {
+	background-color: #E2E5EA;
+	cursor: pointer;
+	display: block;
+	font: 13px/30px Microsoft YaHei;
+	color: #3d3d3d;
+	text-decoration: none;
+	background: url(images/ChildLevelBg.png) repeat-x;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	padding-left:2px;
+	width:201px;
+	padding-right: 17px;
+}
+
+.wrap-menu ul li a:hover {
+	background-color: #D5D9E2;
+	color: #4769C2;
+	background: url(images/ChildLevelBgHover.png) repeat-x;
+}
+
+.wrap-menu ul li a.parentclick {
+	color: #4769C2
+}
+
+.wrap-menu ul li a.leafclick {
+	color: #4769c2;
+}
+
+.wrap-menu ul li a.highlight {
+	color: red;
+}
+
+.wrap-menu ul li a.disable {
+	color: #777777;
+}
+
+.wrap-menu ul li a.noaccess {
+	color: #FF6100;
+}
+
+.img1 {
+	margin-right: 10px;
+	margin-left: -7px;
+	*margin-top: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/ChildLevelFold.png) no-repeat;
+	border: none;
+	vertical-align: middle;
+}
+
+.img1.unfold {
+	background: url(images/ChildLevelUnfold.png) no-repeat;
+}
+
+.img2 {
+	margin-right: 10px;
+	margin-left: -7px;
+	*margin-top: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/MenuIconNO2.png) no-repeat;
+	border: none;
+	vertical-align: middle;
+}
+
+.wrap-menu ul li a:hover>.img2 {
+	background: url(images/MenuIconNO2ClickOn.png) no-repeat;
+}
+
+.first-level-fold {
+	margin-right: 25px;
+	width: 18px;
+	height: 19px;
+	background: url(images/FirstLevelFold.png) no-repeat;
+	border: none;
+}
+
+.first-level-fold.unfold {
+	background: url(images/FirstLevelUnfold.png) no-repeat;
+	border: none;
+}
+
+.icon-default {
+	float: left;
+	margin-left: 15px;
+	margin-top: 3px;
+	margin-right: 5px;
+	width: 16px;
+	height: 17px;
+	background: url(images/IconRiskWarn.png) no-repeat;
+	border: none;
+}
+
+.jrzl_cltMngSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconClientManage.png) no-repeat;
+	border: none;
+}
+
+.jrzl_prjAppSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconProjectCreate.png) no-repeat;
+	border: none;
+}
+
+.jrzl_prjSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconProjectManage.png) no-repeat;
+	border: none;
+}
+
+.jrzl_excuSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconExecuteManage.png) no-repeat;
+	border: none;
+}
+
+.jrzl_almSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconAlmSys.png) no-repeat;
+	border: none;
+}
+
+.jrzl_rentSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconRentalManage.png) no-repeat;
+	border: none;
+}
+
+.jrzl_resSortSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconFundClassify.png) no-repeat;
+	border: none;
+}
+
+.jrzl_riskSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconRiskWarn.png) no-repeat;
+	border: none;
+}
+
+.jrzl_workFlowSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconWorkflowManage.png) no-repeat;
+	border: none;
+}
+
+.jrzl_basicSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconBaseManage.png) no-repeat;
+	border: none;
+}
+
+.jrzl_sysMng {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconSystemManage.png) no-repeat;
+	border: none;
+}
+
+.olderSys {
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(images/IconOldLeasingBusiness.png) no-repeat;
+	border: none;
+}
+
+.first-level-leaf {
+	float: left;
+	margin-top: 3px;
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 12px;
+	height: 12px;
+	background: url(images/MenuIconNO2.png) no-repeat;
+	border: none;
+}
+
+.wrap-menu ul li table:hover .first-level-leaf{
+	background: url(images/MenuIconNO2ClickOn.png) no-repeat;
+}
+
+.wrap-menu ul li table {
+	cursor: pointer;
+	width: 100%;
+	height: 40px;
+	font: 16px/40px Microsoft YaHei;
+	color: #3d3d3d;
+	background: url(images/FirstLevelBg.png) repeat-x;
+	border-bottom: 1px solid #afb7bd;
+}
+
+.wrap-menu ul li table:hover {
+	background: url(images/FirstLevelHoverBg.png) repeat-x
+}
+
+.wrap-menu ul li table td {
+	color: #3d3d3d;
+	font: 16px Microsoft YaHei;
+}
+
+.wrap-menu ul li table td span {
+	margin-left: 5px;
+	color: #3d3d3d;
+	width: 100px;
+	float: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+}
+
+.wrap-menu ul li table td span.disable {
+	color: #999999;
+}
+
+.wrap-menu ul li table td span.click {
+	color: #4769C2;
+}
+
+.wrap-menu ul li table.old-leasing-system {
+	cursor: pointer;
+	width: 100%;
+	height: 40px;
+	font: 16px/40px Microsoft YaHei;
+	color: #3d3d3d;
+	background: url(images/OldSystemBg.png) repeat-x;
+	border-bottom: 1px solid #afb7bd;
+}
+
+.highlight {
+	color: red;
+}

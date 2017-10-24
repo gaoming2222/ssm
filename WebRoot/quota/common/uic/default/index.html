@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="../../plugins/jsTree-3.0.8/themes/default/style.css" />
+<link rel="stylesheet" href="css/index.css" />
+<title></title>
+</head>
+<body>
+    <div class="loading-progress-bg" ><div class="loading-progress-container"><div class="loading-progress-img" ></div><div class="loading-progress-txt">首页跳转中，请稍候...</div></div></div>
+    <div id="layout">
+        <div id="header">
+          <img src="images/blank.gif"  class="logo-img"/>
+          <span class="logo-title" id="headtitle"></span>
+        </div>
+        <div id="toolsbar" >
+            <div class="tools-content">
+               <div class="logo-up-down-area fl">
+                  <a class="logo-up" title="收起/显示logo" onclick="logoToggle(this)"></a>
+                  <a class="left-bar-hide" title="收起/显示菜单栏" onclick="leftBarToggle(this)"></a>
+                  <a class="help-img" id="PUB_DOC_DOCMANAGE" title="帮助文档管理" style="display:none;" onclick="specialAccessButtonClick(this)"></a>
+	           </div>
+	           <div class="shortcut-area fl">
+	           	  <div class="cut-line-span" ></div>
+	              <div class="shortcut-text-span" ></div>
+	              <!-- 增加时间显示 -->
+	         	  <div id="sysTime" class="user-welcome-span"></div>
+	           </div>
+	           <div class="fr">
+	             <a id = "syschg" class="syschg-img" onmouseover="syschg_onclick();" title="系统切换"><span class="syschg-img-text">系</span></a>
+	             <div id="showDiv" class="showDiv">
+			          	<div class="showMenu" id="showMenu"></div>
+			     </div>
+	             <span class="user-welcome-span" id="USERWELCOME"></span>
+	             <a class="logout-img" title="退出" onclick="logout()"></a>
+	           </div>
+	        </div>
+        </div>
+        <div id="container">
+             <!-- 左边操作区bar -------start -->
+            <div id="sidebar">
+              <div id="sidecontrol">
+	            	<div id="sysmenu" >
+	            	    <!-- 固顶及风格切换区 -------start -->
+		            	<div id="sysmenutopbar" >
+		            	  <table>
+	                       <tr>
+	                         <td >
+		            	       <img src="images/blank.gif" class="menu-search-btn" title="进入菜单搜索界面" onclick="menu_search_btn_onclick(this)"/>
+		            	       <img src="images/blank.gif" class="menu-collect-btn" title="我的收藏夹" onclick="menu_collect_btn_onclick(this)"/>
+		            	     </td>
+		            	   </tr>
+		            	  </table>
+		            	 </div>
+		            	<!-- 固顶及风格切换区 -------end -->
+		            	<!-- 手风琴menu -------start -->
+		            	<div id="sys_menu"  class="wrap-menu"></div>
+	               </div>
+	               <div id="searchmenu">
+	                  <div id="searchmenutopbar" >
+		            	  <table>
+	                       <tr>
+	                         <td >
+	                         	<img src="images/blank.gif" class="back-sysmenu-btn" title="返回主菜单" onclick="return_sys_onclick(this)"/>
+	                         </td>
+	                         <td>
+	                            <img src="images/blank.gif" class="menu-search-box-left"  />
+	                         	<input type="text" class="menu-search-box" id="menu_search_text" />
+	                         	<input type="button" hidefocus="true" class="menu-search" onclick="menu_search_onclick()"/>
+	                         </td>
+		            	   </tr>
+		            	  </table>
+		               </div>
+		               <div id="search_menu"  class="wrap-menu"></div>
+	               </div>
+	               <div id="collectmenu" >
+	                   <div id="collectmenutopbar" >
+		            	  <table>
+	                       <tr>
+	                         <td>
+	                          <img src="images/blank.gif" class="back-sysmenu-btn" title="返回主菜单" onclick="return_sys_onclick(this)"/>
+	                         </td>
+	                         <td>
+	                           <img src="images/blank.gif" class="collect-manage-btn" title="管理我的收藏夹" onclick="openFavoriteWin()"/>
+	                         </td>
+		            	   </tr>
+		            	  </table>
+		               </div>
+		               <div id="collect_menu"  class="wrap-menu"></div>
+	               </div>
+              </div>
+            </div>
+            <!-- 左边操作区bar -------end -->
+            <div id="content" ></div>
+        </div>
+
+        <div class="contextMenu" id="sysContextMenu">
+	    	<ul>
+	        	<li id="addToCollectMenu">添加到我的收藏夹</li>
+	      	</ul>
+	    </div>
+
+	    <div class="contextMenu" id="collectContextMenu">
+	      	<ul>
+	        	<li id="removeFromCollectMenu">移除</li>
+	      	</ul>
+	    </div>
+	    <!-- 关闭\关闭其他\关闭所有Tab -->
+		<div class="contextMenu" id="removeTab">
+	   		<ul>
+	   			<li id="remove">关闭</li>
+	        	<li id="removeOtherTabs">关闭其他</li>
+	        	<li id="removeAllTabs">关闭所有</li>
+	      	</ul>
+	    </div>
+
+     <!-- index 新任务提醒div -->
+     <div id="winpop" style="z-index: 100;display: none;">
+     	<span class="title">新任务提醒</span>
+     	<div class="close" onclick="enetcloseDiv();"></div>
+     	<div class="tip"></div>
+     	<div class="todo">
+     		<div class="todo-num" onclick="newTodoTasksTdb();"></div>
+     		<div class="todo-label">待办任务</div>
+     	</div>
+<!--      	<div class="cc">
+     		<div class="cc-num" onclick="newTodoTasksTcs();"></div>
+     		<div class="cc-label">抄送任务</div>
+     	</div> -->
+      </div>
+     <!-- index 新任务提醒div -->
+
+    </div>
+
+
+     <!-- 收藏夹管理  div  start-->
+     <!-- <div class="outer-area"> -->
+     <div class="jrzlSelectTree" id="jrzlFavoriteTree">
+		<table border="0"  height="270px" >
+			<tr height="220px">
+				<td  width="230px" >
+					<div class="leftTreeArea">
+						<div id="leftTreeDiv"></div>
+					</div>
+				</td>
+				<td align="center" width="100px" valign="middle">
+					<div style="display:block;" >
+						<input type="button"  class='button-left' onclick="moveLeft()"  value="左移" style="margin-bottom: 5px"/>
+						<input type="button" class='button-remove'  onclick="remove()" value="移除"  style="margin-bottom: 5px"/>
+					    <input type="button"  class='button-clear' onclick="removeAll()" value="清空"  style="margin-bottom: 5px"/>
+						<input type="button"  class='button-top' onclick="moveFirst()" value="置顶" style="margin-bottom: 5px"/>
+						<input type="button"  class='button-up' onclick="moveUp()"  value="上移"  style="margin-bottom: 5px"/>
+						<input type="button"  class='button-down'  onclick="moveDown()" value="下移" style="margin-bottom: 5px"/>
+						<input type="button"  class='button-bottom'  onclick="moveLast()" value="置底" style="margin-bottom: 5px"/>
+					</div>
+				</td>
+				<td width="230px">
+					<div class="rightTreeArea">
+					   <div id="rightTreeDiv"></div>
+					</div>
+				</td>
+			</tr>
+			<tr height="50px">
+				<td align="center"  colspan='3'>
+				 <input type='button'  class="common-button"  style="margin-right: 10px;text-align: center;" onclick='savaFavWin()' value='保存' />
+				 <input type='button'  class="common-button" style="text-align: center;" onclick='closeFavWin()' value='关闭' />
+				</td>
+			</tr>
+		</table>
+		<div class="tip-area">
+			<span class="tip-span"><font color="red">*</font>说明：</span>
+			<span class="tip-span">1 通过鼠标拖拽可将右侧菜单添加至我的收藏夹：选中右侧菜单,拖拽至左侧收藏夹指定位置。</span>
+			<span class="tip-span">2 通过鼠标拖拽可调整收藏夹顺序：选中收藏夹某一菜单,拖拽至收藏夹指定位置。</span>
+		</div>
+	</div>
+
+
+		<div id="reNameFolderDiv" style="display: none;">
+		 <table class="input-area">
+		    <tr>
+	        	<td class="head">
+	  		   		<font>*</font>请输入名称：
+	   	        </td>
+	           	<td class="content">
+	    	        <input type='text' id='RENAME' name='RENAME'/>
+	   	        </td>
+	          </tr>
+		 </table>
+		 <div class="bottom-button-area">
+		 	 <input type="button" class="common-button" style='margin:5px;' onclick="reNameOnclick()" value="保存"/>
+	         <input type="button"  class="common-button" style='margin:5px;' onclick="closeReName()" value="关闭"/>
+		 </div>
+		</div>
+
+	  <div id="addFolderDiv" style="display: none; padding:0px;">
+		 <table class="input-area">
+		    <tr>
+	            <td class="head">
+	            	<font style="color: red;margin-right: 5px;">*</font>请输入名称：
+	            </td>
+	            <td class="content">
+		            <input type='text' id='FOLDERNAME' name='FOLDERNAME'/>
+	            </td>
+	          </tr>
+		 </table>
+		 <div class="bottom-button-area">
+		 	<input type="button" class="common-button" style='margin:5px;' onclick="addFolderOnclick()" value="保存"/>
+	        <input type="button"  class="common-button" style='margin:5px;' onclick="closeAddFolder()" value="关闭"/>
+		 </div>
+		</div>
+
+
+      <!-- 收藏夹管理  div end -->
+
+</body>
+<script src="../../plugins/jsloader/codebase/jsloader.js"  main="index.js" ></script>
+</html>

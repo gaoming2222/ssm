@@ -1,0 +1,1063 @@
+@CHARSET "utf-8";
+html {
+	scrollbar-face-color: #c2c9cf;
+	scrollbar-highlight-color: #e6e6e6;
+	scrollbar-shadow-color: #cbcbcb;
+	scrollbar-3dlight-color: #CCC;
+	scrollbar-darkshadow-color: #686868;
+	scrollbar-arrow-color: #555;
+	scrollbar-track-color: #ECF0F3;
+	height: 100% !important;
+}
+
+body {
+	height: 100% !important;
+	width: 100% !important;
+	background-color: #f5f7f9 !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	font-size: 12px !important;
+	overflow-y: auto;
+	font-family: "宋体" !important;
+}
+/*进度条  ----start*/
+.loading-progress-bg {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: #cccfd1;
+	z-index: 100;
+}
+
+.loading-progress-container {
+	margin: auto;
+	position: absolute;
+	width: 237px;
+	height: 37px;
+	top: 40%;
+	left: 45%;
+}
+
+.loading-progress-txt {
+	margin-top: 12px;
+	margin-left: 7px;
+	height: 37px;
+	float: left;
+}
+
+.loading-progress-img {
+	background: url("../images/loading.gif") no-repeat;
+	width: 37px;
+	height: 37px;
+	float: left;
+}
+/*进度条  ----end*/
+
+/*出错页面 ----start*/
+.common-error-bg {
+	background: url("../images/error.png") no-repeat;
+	width: 752px;
+	height: 232px;
+	position: absolute;
+	left: 160px;
+	top: 134px;
+}
+
+.common-error-content {
+	width: 350px;
+	height: 232px;
+	position: absolute;
+	left: 340px;
+	top: 0px;
+}
+
+.common-error-header {
+	position: absolute;
+	top: 30px;
+	height: 100px;
+	line-height: 100px;
+	color: #707271;
+	font-size: 30px;
+	font-family: Microsoft YaHei;
+}
+
+.common-error-msg {
+	position: absolute;
+	top: 120px;
+	height: 100px;
+	width: 350px;
+	line-height: 30px;
+	color: #707271;
+	font-size: 15px;
+	font-family: Microsoft YaHei;
+	word-break: break-all;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.common-error-close {
+	position: absolute;
+	top: 150px;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	color: #357DAF;
+	font-size: 15px;
+	font-family: Microsoft YaHei;
+}
+/*出错页面 ----end*/
+a {
+	cursor: pointer;
+	font-size: 12px !important;
+	font-family: "宋体" !important;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #283442;
+	text-decoration: underline;
+}
+
+div {
+	scrollbar-face-color: #c2c9cf;
+	scrollbar-highlight-color: #e6e6e6;
+	scrollbar-shadow-color: #cbcbcb;
+	scrollbar-3dlight-color: #CCC;
+	scrollbar-darkshadow-color: #686868;
+	scrollbar-arrow-color: #555;
+	scrollbar-track-color: #ECF0F3;
+}
+
+div.title {
+	padding-top: 5px;
+	width: 100%;
+	height: 40px;
+}
+
+div.title span.icon-title {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	background: url(../images/IconTitle.png) no-repeat;
+	left: 10px;
+	top: 13px;
+	position: relative;
+}
+
+div.title label.text-title {
+	color: #3d3d3d;
+	font: 14px Microsoft YaHei;
+	left: 18px;
+	top: 12px;
+	position: relative;
+}
+/*外部div*/
+div.outer-area { /* padding-top: 5px; */
+	border: solid 0px c2c9cf;
+	height: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #ECF0F3;
+	*position: relative;
+	*overflow-x: hidden;
+}
+
+div.outer-area div.blank-margin {
+	height: 20px;
+}
+
+/*查询区div*/
+div.inner-search-area {
+	border: solid 1px #c2c9cf;
+	border-bottom-style: none;
+	background-color: #EAEBED;
+	position: relative;
+}
+/*内部按钮区*/
+div.inner-button-area {
+	border: solid 1px #c2c9cf;
+	border-bottom-style: none;
+	text-align: left;
+	background-color: #EAEBED;
+	padding-left: 20px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	height: 33px;
+	position: relative;
+	padding-left: 20px;
+}
+/*查询区域div*/
+div.inner-data-area {
+	border: solid 1px #c2c9cf;
+}
+/*内部按钮区域*/
+div.inner-list-area {
+	background-color: #EAEBED;
+}
+
+div.inner-list-area div.titleBar {
+	height: 30px;
+	line-height: 30px;
+	padding-left: 10px;
+	background: url(../images/Title.png) repeat-x;
+	border: 1px solid #b8bfc5;
+	border-bottom-style: none;
+}
+/* 顶部按钮----start---*/
+div.top-button-area {
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 10px;
+	text-align: right;
+}
+
+div.top-button-area  input[type="button"] {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(../images/ButtonNormal.png) no-repeat !important;
+	/* cursor: pointer !important; */
+	margin-right: 7px;
+}
+
+div.top-button-area  input[type="button"]:hover {
+	background: url(../images/ButtonNormalHover.png) no-repeat !important;
+}
+
+div.top-button-area  input[type="button"]:focus {
+	background: url(../images/ButtonNormalClick.png) no-repeat !important;
+}
+
+div.top-button-area  input.long-button {
+	width: 140px !important;
+	background: url(../images/ButtonLong.png) no-repeat !important;
+}
+div.top-button-area  input.long-button:hover {
+	background: url(../images/ButtonLongHover.png) no-repeat !important;
+}
+div.top-button-area  input.long-button:focus {
+	background: url(../images/ButtonLongClick.png) no-repeat !important;
+}
+
+div.top-button-area  input.extra-long-button {
+	width: 180px !important;
+	background: url(../images/Button180.png) no-repeat !important;
+}
+div.top-button-area  input.extra-long-button:hover {
+	background: url(../images/Button180Hover.png) no-repeat !important;
+}
+div.top-button-area  input.extra-long-button:focus {
+	background: url(../images/Button180Click.png) no-repeat !important;
+}
+
+/* 顶部按钮----end---*/
+
+/* 底部按钮----start---*/
+div.bottom-button-area {
+	padding: 10px 0;
+	text-align: right;
+}
+
+div.bottom-button-area  input[type="button"] {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(../images/ButtonNormal.png) no-repeat !important;
+	/* cursor: pointer !important; */
+	margin-right: 7px;
+	outline: 0;
+}
+
+div.bottom-button-area  input[type="button"]:hover {
+	background: url(../images/ButtonNormalHover.png) no-repeat !important;
+}
+
+div.bottom-button-area  input[type="button"]:focus {
+	background: url(../images/ButtonNormalClick.png) no-repeat !important;
+}
+
+div.bottom-button-area  input.long-button {
+	width: 140px !important;
+	background: url(../images/ButtonLong.png) no-repeat !important;
+}
+div.bottom-button-area  input.long-button:hover {
+	background: url(../images/ButtonLongHover.png) no-repeat !important;
+}
+div.bottom-button-area  input.long-button:focus {
+	background: url(../images/ButtonLongClick.png) no-repeat !important;
+}
+div.bottom-button-area  input.extra-long-button {
+	width: 180px !important;
+	background: url(../images/Button180.png) no-repeat !important;
+}
+div.bottom-button-area  input.extra-long-button:hover {
+	background: url(../images/Button180Hover.png) no-repeat !important;
+}
+div.bottom-button-area  input.extra-long-button:focus {
+	background: url(../images/Button180Click.png) no-repeat !important;
+}
+
+
+/* 底部按钮----end---*/
+
+/* inner search area ----new ---start */
+div.inner-search-area .search-condition {
+	margin-left: 0px;
+	margin-right: 100px;
+}
+
+div.inner-search-area .search-button {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	*top: -4px;
+	width: 100px;
+	border: solid 0px #c2c9cf;
+	text-align: center
+}
+
+div.inner-search-area .search-condition table {
+	width: 100%;
+	border-width: 0px;
+	cellspacing: 0;
+	cellpadding: 5;
+	padding-top: 6px;
+	padding-bottom: 6px
+}
+
+div.inner-search-area .search-condition table tr td {
+	font-size: 12px !important;
+	padding-top: 4px !important;
+	padding-bottom: 4px !important;
+}
+
+div.inner-search-area .search-condition table td.required {
+	color: red;
+	width: 3%;
+	text-align: center;
+}
+
+div.inner-search-area .search-condition table td.head {
+	width: 15%;
+	text-align: right;
+	padding-right: 10px;
+}
+div.inner-search-area .search-condition table td.head font {
+	color: red;
+	margin-right: 3px;
+}
+div.inner-search-area .search-condition table td.content {
+	vertical-align: middle;
+	width: 32%;
+}
+
+div.inner-search-area .search-condition table td input[type="text"] {
+	background-color: #f7f8fa;
+	border-color: #c2c9cf;
+	border-width: 1px;
+	border-style: Solid;
+	height: 17px;
+	line-height: 16px;
+	width: 70%;
+	padding: 2px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	vertical-align: middle;
+}
+
+div.inner-search-area .search-condition table td select {
+	background-color: #f7f8fa;
+	border-color: #c2c9cf;
+	border-width: 1px;
+	border-style: Solid;
+	height: 23px;
+	width: 72%;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	vertical-align: middle;
+}
+
+select {
+	height: 23px;
+	background-color: #f7f8fa;
+	border: Solid 1px #c2c9cf;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	vertical-align: middle;
+	padding: 1px 0;
+}
+
+div.inner-search-area .search-button input[type="button"] {
+	margin-top: 10px;
+	margin-bottom: 8px;
+	border-color: #c2c9cf;
+	border-width: 0px;
+	width: 85px;
+	height: 26px;
+	background: url(../images/ButtonNormal.png) no-repeat;
+}
+
+div.inner-search-area .search-button input[type="button"]:hover {
+	background: url(../images/ButtonNormalHover.png) no-repeat;
+}
+
+div.inner-search-area .search-button input[type="button"]:focus {
+	background: url(../images/ButtonNormalClick.png) no-repeat;
+}
+
+div.inner-search-area .search-button a {
+	margin-top: 5px;
+	margin-bottom: 1px;
+	border-color: #c2c9cf;
+	border-width: 0px;
+	width: 85px;
+	height: 26px;
+}
+
+/* inner search area ----new ---end */
+
+/*inner button area -----new ---start-----*/
+div.inner-button-area .function-button {
+	text-align: right;
+	margin-right: 41px;
+}
+
+div.inner-button-area .function-button  input[type="button"] {
+	margin-right: 7px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	border-color: #c2c9cf;
+	border-width: 0px;
+	width: 85px;
+	height: 26px;
+	background: url(../images/ButtonNormal.png) no-repeat;
+}
+
+div.inner-button-area .function-button input[type="button"]:hover {
+	background: url(../images/ButtonNormalHover.png) no-repeat;
+}
+
+div.inner-button-area .function-button input[type="button"]:focus {
+	background: url(../images/ButtonNormalClick.png) no-repeat;
+}
+
+div.inner-button-area .open-close-search-button {
+	text-align: right;
+	height: 33px;
+	width: 80px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+div.inner-button-area .open-close-search-button input[type="button"] {
+	margin-right: 5px;
+	margin-top: 10px;
+	border-color: #c2c9cf;
+	border-width: 0px;
+	width: 29px;
+	height: 26px;
+	background: url(../images/SearchAreaUp.png) no-repeat;
+}
+
+div.inner-button-area .open-close-search-button input[type="button"]:hover
+	{
+	background: url(../images/SearchAreaUpHover.png) no-repeat;
+}
+
+div.inner-button-area .open-close-search-button input[type="button"].down
+	{
+	background: url(../images/SearchAreaDown.png) no-repeat !important;
+}
+
+div.inner-button-area .open-close-search-button input[type="button"].down:hover
+	{
+	background: url(../images/SearchAreaDownHover.png) no-repeat !important;
+}
+/*inner button area -----new---end-----*/
+
+/*内部数据编辑区----start----*/
+div.inner-data-area table {
+	background-color: #E7EAEF;
+	width: 100%;
+	border-width: 0px;
+	border-collapse: collapse;
+	cellspacing: 0;
+	cellpadding: 5;
+	padding-top: 1px;
+	padding-bottom: 6px
+}
+
+div.inner-data-area table tr td {
+	font-size: 12px !important;
+	padding-top: 6px !important;
+	padding-bottom: 6px !important;
+}
+
+div.inner-data-area table td.title {
+	padding-left: 10px;
+	padding-top: 9px !important;
+	padding-bottom: 9px !important;
+	font-size: 16px;
+	background-color: #d7dce4;
+}
+
+div.inner-data-area table td.required {
+	color: red;
+	width: 3%;
+	text-align: center;
+}
+
+div.inner-data-area table td.head {
+	width: 17%;
+	text-align: right;
+}
+
+div.inner-data-area table td.head font {
+	color: red;
+	margin-right: 3px;
+}
+
+div.inner-data-area table td.content {
+	width: 33%;
+	vertical-align: middle;
+}
+
+div.inner-data-area table td.text-area {
+	width: 82%;
+	vertical-align: middle;
+}
+
+div.inner-data-area table td input[type="text"] {
+	background-color: #f7f8fa;
+	border: 1px solid #c2c9cf;
+	width: 70%;
+	padding: 2px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	vertical-align: middle;
+}
+
+div.inner-data-area table td select {
+	background-color: #f7f8fa;
+	border-color: #c2c9cf;
+	border-width: 1px;
+	border-style: Solid;
+	width: 72%;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	vertical-align: middle;
+}
+
+div.inner-data-area table td textarea {
+	background-color: #f7f8fa;
+	border-color: #c2c9cf;
+	border-width: 1px;
+	border-style: Solid;
+	width: 89%;
+	vertical-align: middle;
+}
+/*内部数据编辑区----end----*/
+
+/* approval history begin*/
+.approve-button {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 29px !important;
+	height: 26px !important;
+	background: url(../images/AppvBtn.png) no-repeat;
+	cursor: pointer !important;
+	display: inline-block;
+}
+
+.approve-button:hover {
+	background: url(../images/AppvBtnHover.png) no-repeat;
+}
+
+.approve-button:active {
+	background: url(../images/AppvBtnClick.png) no-repeat;
+}
+/* approval history end */
+
+
+/*上传控件---start--*/
+.upload {
+	width: 90%;
+}
+/*上传控件---end--*/
+.select-short {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 23px !important;
+	width: 36% !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.select-before-button {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 23px !important;
+	width: 35% !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.select-normal {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 23px !important;
+	width: 72% !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.select-long {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 23px !important;
+	width: 95% !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.input-short {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 17px !important;
+	width: 35% !important;
+	padding: 2px !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.input-before-button {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 17px !important;
+	width: 33% !important;
+	padding: 2px !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.input-normal {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 17px !important;
+	line-height: 16px !important;
+	width: 70% !important;
+	padding: 2px !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.input-long {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf; ! important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 17px !important;
+	line-height: 16px !important;
+	width: 92% !important;
+	padding: 2px !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.common-button {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(../images/ButtonNormal.png) no-repeat !important;
+	/* cursor: pointer !important; */
+	vertical-align: middle;
+}
+
+.common-button:hover {
+	background: url(../images/ButtonNormalHover.png) no-repeat !important;
+}
+
+.common-button:focus {
+	background: url(../images/ButtonNormalClick.png) no-repeat !important;
+}
+
+.short-button {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 50px !important;
+	height: 26px !important;
+	background: url(../images/ButtonShort.png) no-repeat !important;
+	/* cursor: pointer !important; */
+}
+
+.short-button:hover {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 50px !important;
+	height: 26px !important;
+	background: url(../images/ButtonShortHover.png) no-repeat !important;
+	/* cursor: pointer !important; */
+}
+
+.long-button {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 140px !important;
+	height: 26px !important;
+	background: url(../images/ButtonLong.png) no-repeat !important;
+}
+
+.long-button:hover {
+	background: url(../images/ButtonLongHover.png) no-repeat !important;
+}
+.long-button:focus {
+	background: url(../images/ButtonLongClick.png) no-repeat !important;
+}
+
+.extra-long-button {
+	width: 180px !important;
+	background: url(../images/Button180.png) no-repeat !important;
+}
+input.extra-long-button:hover {
+	background: url(../images/Button180Hover.png) no-repeat !important;
+}
+input.extra-long-button:focus {
+	background: url(../images/Button180Click.png) no-repeat !important;
+}
+
+
+
+
+.date {
+	background-color: #FFF;
+	border-color: #688AB7;
+	border-width: 1px;
+	border-style: Solid;
+	width: 200px;
+	padding: 2px;
+}
+
+.choose-button {
+	border-width: 0px !important;
+	width: 28px !important;
+	height: 26px !important;
+	background: url(../images/Search.png) no-repeat !important;
+	cursor: pointer !important;
+	vertical-align: middle;
+	outline: none;
+}
+
+.choose-button:hover {
+	background: url(../images/SearchHover.png) no-repeat !important;
+}
+.choose-button:active {
+	background: url(../images/SearchClick.png) no-repeat !important;
+}
+
+.add-item {
+    border-width: 0px !important;
+    width: 28px !important;
+    height: 26px !important;
+    background: url(../images/ChooseItem.png) no-repeat !important;
+    cursor: pointer !important;
+    vertical-align: middle;
+    outline: none;
+}
+
+.add-item:hover {
+    background: url(../images/ChooseItemHover.png) no-repeat !important;
+}
+.add-item:active {
+    background: url(../images/ChooseItemHover.png) no-repeat !important;
+}
+
+
+.more-condition-down {
+	margin-top: 0px !important;
+	border-width: 0px !important;
+	width: 50px !important;
+	height: 20px !important;
+	background: url(../images/MoreConditionDown.png) no-repeat !important;
+	cursor: pointer !important;
+	vertical-align: middle
+}
+
+.more-condition-down:hover {
+	background: url(../images/MoreConditionDownHover.png) no-repeat
+		!important;
+}
+
+.more-condition-up {
+	background: url(../images/MoreConditionUp.png) no-repeat !important;
+}
+
+.more-condition-up:hover {
+	background: url(../images/MoreConditionUpHover.png) no-repeat !important;
+}
+
+.range-date {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 17px !important;
+	width: 30% !important;
+	padding: 2px !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+}
+
+input { /* outline: none; */
+
+}
+
+input[type="text"]:focus {
+	border-color: #2e82ff !important;
+}
+
+input[type="textarea"]:focus {
+	border-color: #2e82ff !important;
+}
+
+textarea:focus {
+	border-color: #2e82ff !important;
+}
+
+select:focus {
+	border-color: #2e82ff !important;
+}
+
+.ui-dialog .ui-dialog-content .select-table {
+	width: 460px;
+	border-collapse: collapse;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.ui-dialog .ui-dialog-content .select-table td {
+	border: 1px solid #c2c9cf;
+	cellpaddding: 0;
+	cellspacing: 0;
+	padding: 0;
+	margin: 0;
+	height: 30px;
+}
+
+.ui-dialog .ui-dialog-content .select-table td.head {
+	width: 30%;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.ui-dialog .ui-dialog-content .select-table td.content {
+	width: 35%;
+	padding-left: 10px;
+}
+
+/* 明细列表  */
+div.inner-data-area table.detailTable {
+	border-collapse: collapse;
+	background-color: #f1f5f8;
+}
+
+div.inner-data-area table.detailTable td.titleBar {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	padding-left: 10px;
+	height: 30px;
+	background: url(../images/Title.png) repeat-x;
+	border-bottom: 1px solid #b8bfc5;
+}
+
+div.inner-data-area table.detailTable tr {
+	height: 30px;
+}
+
+div.inner-data-area table.detailTable tr.last td  {
+	border-collapse: collapse;
+	border-bottom-style: none;
+}
+
+div.inner-data-area table.detailTable td.head {
+	border: 1px solid #d8dee2;
+	border-left-style: none;
+	padding-right: 10px;
+	width: 25%;
+	text-align: right;
+	background-color: #f1f5f8;
+	line-height: 16px;
+}
+
+div.inner-data-area table.detailTable td.content {
+	border: 1px solid #d8dee2;
+	padding-left: 10px;
+	width: 25%;
+	text-align: left;
+	background-color: #f7fBfe;
+	line-height: 16px;
+	word-break:break-all;
+}
+
+div.inner-data-area table.detailTable td.longcontent {
+	border: 1px solid #d8dee2;
+	padding-left: 10px;
+	width: 75%;
+	text-align: left;
+	background-color: #f7fBfe;
+	word-break:break-all;
+	line-height: 150%;
+}
+/* 最后一行去除下边框(如需) */
+div.inner-data-area table.detailTable tr.last td {
+	border-bottom-style: none;
+}
+/* 第一行去除上边框(如需) */
+div.inner-data-area table.detailTable tr.first td {
+	border-top-style: none;
+}
+/* 去除明细表格td右边框(如需) */
+div.inner-data-area table.detailTable td.clearRight {
+	border-right-style: none;
+}
+/* 去除明细表格td左边框(如需) */
+div.inner-data-area table.detailTable td.clearLeft {
+	border-left-style: none;
+}
+
+/* 明细列表  */
+
+
+#showUpload .select-area {
+	height: 40px;
+	background-color: #ECEDF1;
+	border: 1px solid #D1D2D6;
+	vertical-align: middle;
+	padding-left: 12px;
+	margin-bottom: 10px;
+}
+
+#showUpload .button-area {
+	margin-top: 10px;
+	text-align: center;
+}
+
+/* 租后-回访 checkbox列表 */
+.inner-data-area table.check-list-table td.item {
+	width: 68%;
+	padding-left: 5%;
+	line-height: 16px;
+}
+
+.inner-data-area table.check-list-table td.check input[type='checkbox']{
+	vertical-align: middle;
+}
+
+.inner-data-area table.check-list-table td.check input[type='checkbox'].second
+	{
+	margin-left: 12px;
+}
+
+/* 下载按钮  */
+.file-download-icon {
+	height: 22px;
+	width: 22px;
+	display: inline-block;
+	background: url(../images/Attachment.png) no-repeat;
+}
+
+.file-download-icon:hover {
+	background: url(../images/AttachmentHover.png) no-repeat;
+}
+
+.file-download-icon:active {
+	background: url(../images/AttachmentClick.png) no-repeat;
+}
+
+/* 租后 周正 */
+.mulit-select-table td {
+	border: 1px solid #c2c9cf;
+	/* cellpaddding: 0;
+	cellspacing: 0; */
+	padding: 0;
+	margin: 0;
+	text-indent: 5px;
+}
+
+table.mulit-select-table  tr td:first-child {
+	border-left-style: none;
+}
+
+table.mulit-select-table  tr td:last-child {
+	border-right-style: none;
+}
+
+.clear-button {
+	border-width: 0px !important;
+	width: 28px !important;
+	height: 26px !important;
+	background: url(../images/clearbtn.png) no-repeat;
+	cursor: pointer !important;
+	vertical-align: middle;
+	outline: none;
+}
+
+.clear-button:hover{
+	background: url(../images/clearbtnhover.png) no-repeat;
+}
+
+.clear-button:active{
+	background: url(../images/clearbtnhover.png) no-repeat;
+}
+
+.clear_icon {
+	height: 85px;
+	width: 31px;
+	line-height:85px;
+	margin-left: 18px;
+	float:right;
+	border: 0px solid #d0d0d0;
+	cursor: pointer;
+	background: url(../images/DeleteAll.png) no-repeat;
+}
+
+
+.clear_icon:hover{
+	background: url(../images/DeleteAllHover.png) no-repeat;
+}
+
+.clear_icon:active{
+	background: url(../images/DeleteAllClick.png) no-repeat;
+}
+
+.money_chn {
+	color: blue;
+}

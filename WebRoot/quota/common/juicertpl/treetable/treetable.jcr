@@ -1,0 +1,40 @@
+{# 生成表头}
+<tr>
+{@each columns as col}
+	<td class="head">${col.title}</td>
+{@/each}
+</tr>
+{@each localItems as item, index}
+	<tr id='${item.id}'  pId='${item.pId}'>
+		$${item|links_build}
+	</tr>
+{@/each}	
+
+
+<script>
+$(document).ready(function() {
+	var option = {
+		expandLevel	:	'${expandLevel}',
+			 column	:	'${column}',
+			   path	:	'${path}',
+		  afterDraw	:	function($treeTable){addTrClass($treeTable);},
+		 afterClick :	function($treeTable, id){addTrClass($treeTable);}
+	};
+	$('#${id}').treeTable(option);
+});
+
+{# 给显示列加上间隔色}
+function addTrClass($treeTable){
+	var $trs = $($treeTable).find("tr:visible:gt(0)");
+	for(var i = 0, len = $trs.length; i < len; i++){
+		if(i % 2 == 0){
+			$($trs[i]).removeClass("even");
+			$($trs[i]).addClass("odd");
+		}
+		else {
+			$($trs[i]).removeClass("odd");
+			$($trs[i]).addClass("even");
+		}
+	}
+}
+</script>

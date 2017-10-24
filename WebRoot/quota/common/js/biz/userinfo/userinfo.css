@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+.red-border {
+	border: 1px solid red !important;
+}
+
+.msg-wrap {
+	vertical-align: middle;
+	background-image: url("images/validator_default.png");
+	width: 16px;
+	height: 16px;
+	display: none;
+}
+
+.n-ok {
+	background-position: -16px 0;
+	display: inline-block !important;
+}
+
+.n-warn {
+	background-position: 0px 0;
+	display: inline-block !important;
+}
+
+.send-button-area {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	background-color: #ecedf1;
+	border-top: 1px solid #dfe0e5;
+}

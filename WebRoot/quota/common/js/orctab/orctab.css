@@ -1,0 +1,87 @@
+/*******orc-tab样式---start******/
+.orc-tab-ul {
+	display: block;
+	background-color: #EEF2F5;
+	height: 39px;
+	margin-top: 1px;
+	border-bottom: 1px solid #C2C7CD;
+	vertical-align: middle;
+	*overflow: hidden;
+	*margin-left: 0px;
+	padding-left: 24px;
+}
+
+.orc-tab-li {
+	display: block;
+	*display: inline-block;
+	float: left;
+	height: 35px;
+	line-height: 40px;
+	font: "宋体" 12px; 
+	text-align : center;
+	cursor: default;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+	list-style-type: none;
+	text-align: center;
+	padding:0 20px;
+	*margin-left: 0px;
+	*margin-right: 0px;
+}
+
+.orc-tab-li:hover {
+	
+}
+
+.orc-tab-cutline {	
+	width: 0px;
+	height: 20px;
+	border-left: 1px solid #AFB6BC;
+	line-height: 40px;
+	margin-top: 10px;
+	display: inline-block;
+	float: left;	
+}
+
+.orc-tab-selected {
+	border-bottom: 4px solid #1B7EE4;
+}
+
+.orc-tab-div-ie7 {
+	clear: both;
+	background-color: #ECF0F3;
+	padding: 5px 0;
+	top: 36px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	margin-right:0px;
+	margin-top: -19px;
+	display:none;
+}
+
+.orc-tab-active-ie7 {
+	display: block;
+}
+
+.orc-tab-div {
+	margin-top: 6px;
+	clear: both;
+	background-color: #ECF0F3;
+	padding: 5px;
+	float: left;
+	top: 36px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	position: absolute;
+	overflow-y: auto;
+	overflow-x: hidden;
+	z-index: -1;
+}
+
+.orc-tab-active {
+	z-index: 1;
+}
+/*******orc-tab样式--end******/

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+author:80234497
+ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>额度信息监控</title>
+<script type="text/javascript"
+	src="common/plugins/jsloader/codebase/jsloader.js"
+	main="bondmonitormng.js"></script>
+</head>
+<body>
+	<form id="submitform" name="submitform" method="post" action=" ">
+		<div class="outer-area">
+			<div id="maincontent">
+				<div class="title">
+					<span class="icon-title"></span> <label class="text-title">额度信息监控</label>
+				</div>
+				<div class="inner-search-area">
+					<div class="search-condition">
+						<table id="datatable">
+							<tr>
+								<td class="required"></td>
+								<td class="head">日期    ：</td>
+								<td class="content">
+								<input type="text" id="TRADE_DAT" name="TRADE_DAT" />
+								</td>
+								<td class="required"></td>
+								<td class="head">额度编号：</td>
+								<td class="content">
+								<input type = "text" id="QUOTA_ID" name="QUOTA_ID" />
+								</td>
+							</tr>
+							<tr>
+								<td class="required"></td>
+								<td class="head">核心客户编号：</td>
+								<td class="content">
+								<input type="text" id="CORE_SYS_ID" name="CORE_SYS_ID" />
+							    </td>
+								<td class="required"></td>
+								<td class="head">领用编号</td>
+								<td class="content">
+								<input type="text" id="LEAD_NUM" name="LEAD_NUM" /></td>
+								<td class="required"></td>
+							</tr>
+						</table>
+						<div class="search-button">
+							<input type="button" id="QUERY" name="QUERY"
+								onclick="query_onclick()" value="查询" /> <input type="button"
+								id="selAll" class="more-condition-down"
+								onclick="JrzlTools.moreSearchConditionToggle(this)" />
+						</div>
+					</div>
+				</div>
+				<div class="inner-list-area">
+					<table id="mygrid"></table>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+
+</html>

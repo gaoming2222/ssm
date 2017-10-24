@@ -1,0 +1,25 @@
+.OrgBox{
+    font-size:12px;
+    padding:5px 5px 5px 5px;
+    clear:left;
+    float:left;
+    text-align:center;
+    position:absolute;
+    width:70px;
+    height:30px;
+    line-height:30px;
+    font-size:14px;
+    border:0px solid orange;
+    background-color:lightgrey; 
+    background: url(images/node1.png) ;
+    word-break:break-all;
+    white-space:normal;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    overflow: hidden;
+    color:#73767a;
+   }
+.OrgBox:hover{
+    background: url(images/node2.png) ;
+   }

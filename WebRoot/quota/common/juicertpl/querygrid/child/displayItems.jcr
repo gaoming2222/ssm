@@ -1,0 +1,7 @@
+﻿{# displayItems 函数}
+function(data, type, full, meta){
+      if(${displayItems}[data]==null){ 
+           return '';
+      }
+      return ${displayItems}[data]; 
+}

@@ -1,0 +1,4 @@
+#Sys_Jrzl_Loading_Bar_Shadow { z-index: 10003; position: absolute; background-color: #B8DEF5; filter: alpha(opacity=25); opacity: 0.25; width: 100%; height: 100%; left: 0px; top: 0px; }
+#Sys_Jrzl_Loading_Bar_Div { z-index: 10004; position: fixed; position: absolute; height: auto; width: auto; }
+.loadingMsg { text-align: center; font-size: 14px; }
+.loadingMsg div { margin-right: 4px; }

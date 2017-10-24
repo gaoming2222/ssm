@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>额度信息更新</title>
+<script type="text/javascript" src="common/plugins/jsloader/codebase/jsloader.js" main="quotainfoupdate.js"></script>
+</head>
+<body>
+	<form name="submitform" id="submitform" method="post">
+		<div class="outer-area">
+			<div class="title">
+				<span class="icon-title"></span><label class="text-title">额度信息更新</label>
+			</div>
+            <div class="inner-data-area">
+				<table class="detailTable">
+					<tr class="first">
+						<td class="head"><font>*</font>额度编号</td>
+						<td class="content">
+							<input type="text" id="QUOTA_ID" name="QUOTA_ID" value="ED000001" readonly="readonly" />
+						</td>
+						<td class="head"><font>*</font>核心客户编号编号</td>
+						<td class="content">
+							<input type = "text" id="CORE_USER_ID" name="CORE_USER_ID" value = "" readonly = "" onchange=""/>
+						</td>
+					</tr>
+					<tr class="first">
+						<td class="head"><font>*</font>客户名称</td>
+						<td class="content">
+							<input type = "text" id = "CLIENT_NAM" name = "CLIENT_NAM" value = "高先生" readonly = "readonly" />
+						</td>
+						<td class="head"><font>*</font>总额度</td>
+						<td class="content">
+							<select id="QUOTA_NUM" name="QUOTA_NUM" onchange=""  readonly = "readonly">
+							<option>期限</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="head">
+						<td class="head"><font>*</font>额度期限起</td>
+						<td class="content">
+							<input type = "text" id = "DAT_STR" name = ""DAT_STR"" value = "" readonly = "readonly" />
+						</td>
+						<td class="head"><font>*</font>额度期限止</td>
+						<td class="content">
+							<input type = "text" id = "DAT_END" name = "DAT_END" value = "" readonly = "readonly" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+		 <div class="inner-button-area">
+                <div class="function-button">
+                    <input type="button" id="ADD" name="ADD" onclick="save_onclick()" value="保存"/>
+                </div>
+            </div>
+	</form>
+	</body>
+	</html>

@@ -1,0 +1,906 @@
+<script>
+var rules_${UUID} = {
+    number_rule      :"^(-?\\d+)(\\.\\d+)?$",
+    number_errorMsg  :"必须是合法的数字!",
+    money_rule       :"^(-?\\d+)(\\.\\d{1,2})?$",
+    money_errorMsg   :"必须是最多两位小数的数字!",
+    integer_rule     :"^[1-9]*[1-9][0-9]*$",
+    integer_errorMsg :"必须是正整数",
+    mobile_rule      :"^\\d{11}$",
+    mobile_errorMsg  :"必须是合法的手机号!",
+    email_rule       :"^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.(?:com|cn)$",
+    email_errorMsg   :"必须是合法的邮箱号!",
+    date_rule        :"^(?:(?!0000)[0-9]{4}(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])(?:29|30)|(?:0[13578]|1[02])31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)0229)$",
+    date_errorMsg    :"必须是合法的日期!"
+};
+$(document).ready(function() {
+	$('#${id}').dataTable( {
+	      "dom": 'T<"clear">lfrtip',
+	      "data" :${data},
+	      "searching":${search},
+	      "isFloat" : ${isFloat},		{# isFloat为true时，鼠标hover显示浮动信息，为false时，鼠标hover显示所有内容}
+	      "order": [],
+	      {@if height != "auto"}
+	      "scrollY": ${height},
+	      {@/if}
+	      {@if scrollX }
+	      	"scrollX": 'auto',
+	      {@/if}
+	      "multipleSelection": true,
+	      "info": false,
+	      "bAutoWidth":false,
+		  "paging": false,
+	      "aoColumns": [
+	          {@if needCheckBox}
+	           {
+		        	   	{@if scrollX }
+		        	   		"sWidth": '40px',
+	    				{@else}
+		        	   		"sWidth": '5%',
+		        	   	{@/if}
+		            	"orderable": false,
+		            	"render": function ( data, type, full, meta ) {
+		            		return '<div class="DataTables_sort_wrapper-noSort"><input type="checkbox" name="DATATABLESSINGLESELECT_${UUID}" onclick="dataTables_SingleSelect_${UUID}(this)"/></div>';
+		            	},
+		            	className:"center datatables-inner-td",
+		            	"title":'<input  type="checkbox" id="DATATABLESALLSELECT_${UUID}" onclick="dataTables_AllSelect_${UUID}()"/>'
+	             },
+	           {@/if}
+	           {@if needOrderNum}
+                {
+                	 {@if scrollX }
+         				"sWidth": '50px',
+         			{@else}
+         				"sWidth": '6%',
+         			{@/if}
+					"orderable": false,
+					"render": function ( data, type, full, meta )
+                	{
+					  return"";
+                	},
+                	className:"center datatables-inner-td",
+					"title":"序号"
+				},
+	           {@/if}
+	      {@each columns as column,index}
+	            {@if index!=0}
+	             ,
+	            {@/if}
+	            {
+	               {@if column.width!=null}
+	               sWidth:'${column.width}',
+	               {@/if}
+		           {@if column.type=="checkbox"}
+		            render: function (val, type, row) {
+		                return val == true ? "是" : "否";
+		            },
+		           {@else if column.type=="combobox"}
+		            render: function  (val, type, row){
+		                 var combData_${UUID} = ${column.comboData};
+		                 var len = combData_${UUID}.length;
+		                 for(var i=0;i<len;i++){
+		                    var data = combData_${UUID}[i];
+		                    if(data.value == val){
+		                      return data.label;
+		                    }
+		                 }
+		            },
+		           {@else if column.type=="money"}
+		            	render:$.fn.dataTable.render.number( '\,', '.', 2, '' ,'${column.moneyException}' ),
+		           {@else if column.displayItems != null}
+		           		render: {@include "#"+pathLevel+"common/juicertpl/editgrid/child/displayItems.jcr", column},
+		           {@else}
+		           		render: ${column.renderer},
+		           {@/if}
+		           title: '${column.title}',
+	               data: '${column.property}',
+	               {@if column.inlineEdit != false}
+		               fnCreatedCell:function (td, cellData, rowData, row, col) {
+		            	   $(td).bind('dblclick', {
+		            		   EDIT_TYPE : '${column.inlineEdit}',
+		            		   OPTION : ${column.inlineOption},
+		            		   COLUMNCFG_INDEX : ${index}
+		            	   }, buildInlineEditor);
+	                   },
+                   {@/if}
+	               
+	               {@if isFloat == true}					{# isFloat为true时，鼠标hover显示浮动信息，为false时，鼠标hover显示所有内容}
+                   className:'${column.align} datatables-inner-td',
+                   {@else}
+                   className:'${column.align} datatables-inner-td-nonefloat',
+                   {@/if}
+	               
+	               visible: !${column.hidden},
+	               {@if column.hidden == true} {# 隐藏列,默认不启用排序选项}
+              			orderable: false
+              		{@else}
+              			orderable: ${column.sortable}
+              		{@/if}
+	            }
+           {@/each}
+	      ],
+
+	      "drawCallback":function( settings ) {
+				var oTable = $('#${id}').dataTable();
+				var orderColIndex = 0;
+		           {@if needCheckBox}
+		           	  orderColIndex = 1;
+		           {@/if}
+    		   {@if needOrderNum}
+	                var table_rows = oTable.fnGetNodes();
+	                var displayStart = settings._iDisplayStart;
+                    $.each(table_rows, function(index){
+                        $("td:eq("+ orderColIndex +")", this).html(displayStart+index+1);
+                    });
+	           {@/if}
+
+	           var cbHead = document.getElementById("DATATABLESALLSELECT_${UUID}");
+		    	if(null!=cbHead){
+		    	    cbHead.checked=false;
+		    	    dataTables_AllSelect_${UUID}();
+		    	}
+
+
+		    	$('#${id} tbody tr').unbind( 'click');
+			    $('#${id} tbody tr').bind( 'click',  function () {
+			    	{# if height != "auto" || !scrollX  }
+			        	oTable.$('tr.selected').removeClass('selected');
+			            $(this).addClass('selected');
+			       {# if }
+			    } );
+			    {@if rowdbclick!=null}
+			    /** 80374725**/
+		          $('#${id} tbody tr').dblclick(function(e){
+		            	var oTable = $('#${id}').dataTable();
+			    		var aData = oTable.fnGetData(oTable.$('tr.selected'));
+			    		var index = oTable.$('tr.selected').index();
+
+			    		if(aData == null){
+			    		   JrzlTools.alert("请选中一条数据后再执行操作。","提示");
+			    		   return null;
+			    		}else{
+			    			aData.index = index;
+			    			${rowdbclick}(aData);
+			    		}
+						
+					});
+             {@/if}
+		   },
+
+	      "language":{
+		            	    "emptyTable":     "列表中没有可获取的数据",
+		            	    "info":           "显示 _START_ 到 _END_ 条，共 _TOTAL_ 条",
+		            	    "infoEmpty":      "显示 0 到 0 条，共 0 条",
+		            	    "infoFiltered":   "(从总 _MAX_ 条中过滤)",
+		            	    "infoPostFix":    "",
+		            	    "thousands":      ",",
+		            	    "lengthMenu":     "选择页条目数 _MENU_ ",
+		            	    "loadingRecords": "加载数据中...",
+		            	    "processing":     "加载数据中...",
+		            	    "search":         "搜索:",
+		            	    "zeroRecords":    "没有查到匹配的数据",
+		            	    "paginate": {
+		            	        "first":      "第一页",
+		            	        "last":       "最后页",
+		            	        "next":       "下一页",
+		            	        "previous":   "上一页"
+		            	    }
+		 }
+	} );
+
+	{@if buttonBar}
+		$("#${id}_wrapper").prepend($('<div id="${id}_buttonBar_${UUID}" class="DTTT_container"></div>'));
+		$("#${id}_buttonBar_${UUID}").empty();
+		{@each customButtons as button,index}
+	       $("#${id}_buttonBar_${UUID}").append($('<input type="button" class="datatables-common-button" value="${button.text}" onclick="${button.handle}()" ></input>'));
+		{@/each}
+		{@if add}
+		   $("#${id}_buttonBar_${UUID}").append($('<input type="button" class="datatables-common-button" value="新增" onclick="addRow_${UUID}()" ></input>'));
+		{@/if}
+		{@if modify}
+		   $("#${id}_buttonBar_${UUID}").append($('<input type="button" class="datatables-common-button" value="修改" onclick="modifyRow_${UUID}()" ></input>'));
+		{@/if}
+		{@if remove}
+		   $("#${id}_buttonBar_${UUID}").append($('<input type="button" class="datatables-common-button" value="删除" onclick="removeRow_${UUID}()" ></input>'));
+		{@/if}
+		{@if imports}
+		   $("#${id}_buttonBar_${UUID}").append($('<input type="button" class="datatables-common-button" value="导入" onclick="importsRow_${UUID}()" ></input>'));
+		{@/if}
+		{@if clear}
+		   $("#${id}_buttonBar_${UUID}").append($('<input type="button" class="datatables-common-button" value="清空" onclick="clearRow_${UUID}()" ></input>'));
+		{@/if}
+	{@/if}
+});
+
+var recordIndexs_${UUID} = [];{#记录checkbox选中的行号}
+{#列勾选}
+function dataTables_SingleSelect_${UUID}(cbSingle){
+	var table = $('#${id}').DataTable();
+	var data = table.data();
+	var dataLen = data.length;
+
+	var oTable = $('#${id}').dataTable();
+	var index = oTable.fnGetPosition( cbSingle.parentNode.parentNode.parentNode );
+
+	var cbHead = document.getElementById("DATATABLESALLSELECT_${UUID}");
+	if(!cbSingle.checked){
+		cbHead.checked=false;
+		var temp = [];
+		for(var i =0,len=recordIndexs_${UUID}.length;i<len;i++){
+			if(index != recordIndexs_${UUID}[i]){
+				temp.push(recordIndexs_${UUID}[i]);
+			}
+		}
+		recordIndexs_${UUID} = [];
+		recordIndexs_${UUID} = temp;
+	}else{
+	    var cbSingles = document.getElementsByName("DATATABLESSINGLESELECT_${UUID}");
+	    var checkedLen=cbSingles.length;
+	    recordIndexs_${UUID}.push(index);
+        if(dataLen == recordIndexs_${UUID}.length){
+    	   cbHead.checked=true;
+        }
+	}
+}
+{#勾选所有}
+function dataTables_AllSelect_${UUID}(){
+    var table = $('#${id}').DataTable();
+    var data = table.data();
+    var dataLen = data.length;
+
+	var cbHead = document.getElementById("DATATABLESALLSELECT_${UUID}");
+	var cbSingles = document.getElementsByName("DATATABLESSINGLESELECT_${UUID}");
+	var i=0 ,len=cbSingles.length;
+
+	if(cbHead.checked){
+		 for(;i < len;i++){
+			cbSingles[i].checked = true;
+		 }
+		 recordIndexs_${UUID}=[];
+	     for(var j=0;j<dataLen;j++){
+	    	 recordIndexs_${UUID}.push(j);
+	     }
+	}else{
+		 for(;i < len;i++){
+				cbSingles[i].checked = false;
+		 };
+		 recordIndexs_${UUID}=[];
+	}
+
+}
+
+
+
+{#校验}
+function validate_${UUID}(data,isModify){
+   $("span[name='Item_Field_Error']").text("");
+   var result={errorFlag:0};
+   {@each editColumns as column,index}
+      {@if column.allowBlank == false}
+        if(data.${column.property}== null || data.${column.property}==''){
+          result.errorMsg = '${column.title}不能为空!';
+          result.errorProperty = '${column.property}';
+          result.errorFlag = 1;
+          return result;
+        }
+
+      {@/if}
+      {# 长度校验}
+      {@if column.maxLength != null}
+      	result.errorMsg = '${column.title}长度不能超过'+ ${column.maxLength} +'位字符长度!';
+      	var realLength = JrzlTools.getRealLength(data.${column.property});
+      	if(realLength > ${column.maxLength}){
+      		result.errorProperty = '${column.property}';
+      		result.errorFlag = 1;
+      		return result;
+      	}
+      {@/if}
+
+      {# 通用校验}
+      if(data.${column.property} != null && data.${column.property}!=''
+                             && rules_${UUID}["${column.type}_rule"]!=null){
+         if( !(new RegExp(rules_${UUID}["${column.type}_rule"]).test(data.${column.property}))){
+        	 result.errorMsg = rules_${UUID}["${column.type}_errorMsg"];
+          	 result.errorProperty = '${column.property}';
+             result.errorFlag = 1;
+             return result;
+          }
+       }
+       {# 自定义校验}
+       if(data.${column.property} != null && data.${column.property} != ''){
+    	   {@if column.regex != null}
+    	   		if( !(new RegExp('${column.regex}').test(data.${column.property}))){
+		          	 result.errorMsg = '${column.regexText}';
+		          	 result.errorProperty = '${column.property}';
+		             result.errorFlag = 1;
+		             return result;
+    	   		}
+          {@/if}
+        }
+       	{# 列数据唯一性校验}
+       	if(data.${column.property} != null && data.${column.property} != ''){
+       		{@if column.isUnique == true}
+		       	var table = $('#${id}').DataTable(),
+		       		oTable = $('#${id}').dataTable();
+		 	    var rowData = table.data(),
+		 	    	index = oTable.$('tr.selected').index();
+		 	    for(var i = 0,dataLen = rowData.length; i < dataLen; i++){
+		 	    	if(isModify && i == index){
+		 	    		continue;
+		 	    	}
+		 	    	if(rowData[i].${column.property} == data.${column.property}){
+		 	    		result.errorMsg = "“${column.title}”不允许重复";
+		 	    		result.errorProperty = '${column.property}';
+		 	    		result.errorFlag = 1;
+		 	    		return result;
+		 	    	}
+		 	    }
+            {@/if}
+       	}
+   {@/each}
+   return result;
+
+}
+{#新增部分}
+{@if add}
+	var addWin_${UUID};
+	{#生成新增窗口}
+	function addRow_${UUID}(){
+	   var dateList = [];
+	   var mainContainer=$('<div class="editor-main-container-div"   id="MainContainer_${UUID}"></div>');
+	   var mainTableDiv = $('<div class="editor-main-table-div" ></div>');
+	   var mainTable    =$('<table class="editor-main-table"></table>');
+	   $(mainTableDiv).append(mainTable);
+	   {@each editColumns as column,index}
+	        var tr_${column.property};
+    	    {@if column.hidden == true}
+      			tr_${column.property} = $('<tr style="display: none;"></tr>');
+      		{@else}
+      			tr_${column.property} = $('<tr></tr>');
+      		{@/if}
+	        var title_${column.property} = $('<td class="editor-label">${column.title}</td>');
+	        var value_${column.property} = $('<td class="editor-value"></td>');
+	        var item_${column.property};
+	        {@if column.type=="date"}
+				item_${column.property} = $('<input id="Item_Field_${column.property}" class="editor-input" type="text" value="${column.defaultValue}" />');
+				dateList.push("Item_Field_${column.property}");
+		    {@else if column.type=="checkbox"}
+		        item_${column.property} = $('<input id="Item_Field_${column.property}" type="checkbox" {@if column.defaultValue} checked="checked" {@/if} />');
+		    {@else if column.type=="combobox"}
+		        item_${column.property} = $('<select id="Item_Field_${column.property}" class="editor-select" />');
+		        var combData_${column.property}_${UUID} = ${column.comboData};
+		        var option_${column.property}_${UUID}="";
+	            for(var i=0,len = combData_${column.property}_${UUID}.length;i<len;i++){
+	                var data = combData_${column.property}_${UUID}[i];
+	                if(data.value == "${column.defaultValue}"){
+			            option_${column.property}_${UUID} += "<option value="+data.value+" selected>"+data.label+"</option>";
+			        }else{
+	                	option_${column.property}_${UUID} += "<option value="+data.value+">"+data.label+"</option>";
+	                }
+	            }
+	            $(item_${column.property}).html(option_${column.property}_${UUID});
+		    {@else}
+		        item_${column.property} = $('<input id="Item_Field_${column.property}" class="editor-input" type="text" value="${column.defaultValue}" />');
+		    {@/if}
+
+	        var error_${column.property} = $('<span class="editor-error-span" id="Item_Field_Error_${column.property}" name="Item_Field_Error"></span>');
+
+	        $(value_${column.property}).append(item_${column.property});
+	        $(value_${column.property}).append(error_${column.property});
+
+	        $(tr_${column.property}).append(title_${column.property});
+	        $(tr_${column.property}).append(value_${column.property});
+		    $(mainTable).append(tr_${column.property});
+	   {@/each}
+	   var buttonArea = $('<div class="editor-button-area"><input type="button" class="datatables-common-button" value="确定" onclick="addWinConfirm_${UUID}()"/><input type="button" class="datatables-common-button" style="margin-left:15px;" value="取消" onclick="addWinCancel_${UUID}()"/></div>');
+	   $(mainContainer).append(mainTableDiv);
+	   $(mainContainer).append(buttonArea);
+	   $(document.body).append(mainContainer);
+
+	   addWin_${UUID} = JrzlTools.openModalWindow({
+			id : "MainContainer_${UUID}",
+			title : "新增",
+			height : "auto",
+			width : 350,
+			beforeClose:function(){
+	               $(mainContainer).remove();;
+	           }
+		});
+	    for(var i=0,len=dateList.length;i<len;i++){
+	    	$("#" + dateList[i]).bind("focus",function(){
+	    		WdatePicker({
+	    			dateFmt	:	"yyyyMMdd"
+	    		});
+	    	});
+	    }
+	}
+	{#新增确定}
+	function addWinConfirm_${UUID}(){
+	    var data={};
+	    {@each editColumns as column,index}
+	        {@if column.type=="checkbox"}
+	            if($("#Item_Field_${column.property}").attr("checked")=="checked" || $("#Item_Field_${column.property}").attr("checked")==true){
+	            	data["${column.property}"] = true;
+	            }else{
+	                data["${column.property}"] = false;
+	            }
+	        {@else}
+	        	data["${column.property}"] = $("#Item_Field_${column.property}").val();
+	        {@/if}
+	    {@/each}
+	    var result = validate_${UUID}(data);
+	    if(result.errorFlag == 1){
+	        $("#Item_Field_Error_"+result.errorProperty).text(result.errorMsg);
+	    	return;
+	    }
+	    var oTable = $('#${id}').dataTable();
+	    oTable.fnAddData(data);
+	    $('#${id} tbody tr').unbind( 'click');
+	    $('#${id} tbody tr').bind( 'click',  function () {
+	        	oTable.$('tr.selected').removeClass('selected');
+	            $(this).addClass('selected');
+	    } );
+		addWin_${UUID}.hide();
+	}
+	{#新增取消}
+	function addWinCancel_${UUID}(){
+		addWin_${UUID}.hide();
+	}
+{@/if}
+
+{#修改部分}
+{@if modify}
+	var modifyWin_${UUID};
+	{#生成修改窗口}
+	function modifyRow_${UUID}(){
+	   var oTable = $('#${id}').dataTable();
+	   var aData = oTable.fnGetData(oTable.$('tr.selected'));
+	   if(aData == null){
+	       JrzlTools.alert("没有选中任何行","提示");
+		   return null;
+	   }
+
+	   var dateList = [];
+	   var mainContainer=$('<div class="editor-main-container-div"  id="MainContainer_${UUID}"></div>');
+	   var mainTableDiv = $('<div class="editor-main-table-div" ></div>');
+	   var mainTable    =$('<table class="editor-main-table"></table>');
+	   $(mainTableDiv).append(mainTable);
+	   {@each editColumns as column,index}
+	       	var tr_${column.property};
+    	    {@if column.hidden == true}
+      			tr_${column.property} = $('<tr style="display: none;"></tr>');
+      		{@else}
+      			tr_${column.property} = $('<tr></tr>');
+      		{@/if}
+	        var title_${column.property} = $('<td class="editor-label">${column.title}</td>');
+	        var value_${column.property} = $('<td class="editor-value"></td>');
+	        var item_${column.property};
+	        {@if column.type=="date"}
+				item_${column.property} = $('<input id="Item_Field_${column.property}" class="editor-input" type="text" value="'+aData.${column.property}+'" />');
+				dateList.push("Item_Field_${column.property}");
+		    {@else if column.type=="checkbox"}
+		        if(aData.${column.property} == true){
+		        	item_${column.property} = $('<input id="Item_Field_${column.property}" type="checkbox"  checked="checked" />');
+		        }else{
+		        	item_${column.property} = $('<input id="Item_Field_${column.property}" type="checkbox"  />');
+		        }
+		    {@else if column.type=="combobox"}
+		        item_${column.property} = $('<select id="Item_Field_${column.property}" class="editor-select" />');
+		        var combData_${column.property}_${UUID} = ${column.comboData};
+		        var option_${column.property}_${UUID}="";
+	            for(var i=0,len = combData_${column.property}_${UUID}.length;i<len;i++){
+	                var data = combData_${column.property}_${UUID}[i];
+	                if(data.value == aData.${column.property}){
+			            option_${column.property}_${UUID} += "<option value="+data.value+" selected>"+data.label+"</option>";
+			        }else{
+	                	option_${column.property}_${UUID} += "<option value="+data.value+">"+data.label+"</option>";
+	                }
+	            }
+	            $(item_${column.property}).html(option_${column.property}_${UUID});
+		    {@else}
+		        item_${column.property} = $('<input id="Item_Field_${column.property}" class="editor-input" type="text" value="'+aData.${column.property}+'" />');
+		    {@/if}
+
+	        var error_${column.property} = $('<span class="editor-error-span" id="Item_Field_Error_${column.property}" name="Item_Field_Error"></span>');
+
+	        $(value_${column.property}).append(item_${column.property});
+	        $(value_${column.property}).append(error_${column.property});
+
+	        $(tr_${column.property}).append(title_${column.property});
+	        $(tr_${column.property}).append(value_${column.property});
+		    $(mainTable).append(tr_${column.property});
+	   {@/each}
+	   var buttonArea = $('<div class="editor-button-area"><input type="button" class="datatables-common-button" value="确定" onclick="modifyWinConfirm_${UUID}()"/><input type="button" class="datatables-common-button" style="margin-left:15px;" value="取消" onclick="modifyWinCancel_${UUID}()"/></div>');
+	   $(mainContainer).append(mainTableDiv);
+	   $(mainContainer).append(buttonArea);
+	   $(document.body).append(mainContainer);
+
+	   modifyWin_${UUID} = JrzlTools.openModalWindow({
+			id : "MainContainer_${UUID}",
+			title : "修改",
+			height : "auto",
+			width : 350,
+			beforeClose:function(){
+	               $(mainContainer).remove();;
+	           }
+		});
+	    for(var i=0,len=dateList.length;i<len;i++){
+	    	$("#" + dateList[i]).bind("focus",function(){
+	    		WdatePicker({
+	    			dateFmt	:	"yyyyMMdd"
+	    		});
+	    	});
+	    }
+
+	}
+	{#修改确定}
+	function modifyWinConfirm_${UUID}(){
+	    var data={};
+	    {@each editColumns as column,index}
+	        {@if column.type=="checkbox"}
+	            if($("#Item_Field_${column.property}").attr("checked")=="checked" || $("#Item_Field_${column.property}").attr("checked")==true){
+	            	data["${column.property}"] = true;
+	            }else{
+	                data["${column.property}"] = false;
+	            }
+	        {@else}
+	        	data["${column.property}"] = $("#Item_Field_${column.property}").val();
+	        {@/if}
+	    {@/each}
+	    var result = validate_${UUID}(data,true);
+	    if(result.errorFlag == 1){
+	        $("#Item_Field_Error_"+result.errorProperty).text(result.errorMsg);
+	    	return;
+	    }
+	    var oTable = $('#${id}').dataTable();
+	    oTable.fnUpdate(data,oTable.$('tr.selected'));
+
+	    $('#${id} tbody tr').unbind( 'click');
+	    $('#${id} tbody tr').bind( 'click',  function () {
+	        	oTable.$('tr.selected').removeClass('selected');
+	            $(this).addClass('selected');
+	    } );
+		modifyWin_${UUID}.hide();
+	}
+	{#修改取消}
+	function modifyWinCancel_${UUID}(){
+		modifyWin_${UUID}.hide();
+	}
+{@/if}
+
+{#删除部分}
+{@if remove}
+	function removeRow_${UUID}(){
+	   var oTable = $('#${id}').dataTable();
+	   var aData = oTable.fnGetData(oTable.$('tr.selected'));
+	   if(aData == null){
+	       JrzlTools.alert("没有选中任何行","提示");
+		   return null;
+	   }
+	   JrzlTools.confirm("确定删除选中的行?","确认",function(flag){
+	       if(flag){
+	         oTable.fnDeleteRow(oTable.$('tr.selected'));
+	       }
+	   });
+	}
+{@/if}
+
+{#导入部分}
+{@if imports}
+	function importsRow_${UUID}(){
+	   ${handleImportData}();
+	}
+{@/if}
+{@if clear}
+	function clearRow_${UUID}(){
+	   var table = $('#${id}').DataTable();
+	   JrzlTools.confirm("确定清空表格中的数据?","确认",function(flag){
+	       if(flag){
+	         table.clear().draw();
+	       }
+	   });
+	}
+{@/if}
+
+
+var ${id}  = {
+		    		{# 获得所有数据}
+		    		getData: function(){
+			    	    var table = $('#${id}').DataTable();
+			    	    var data = table.data();
+			    	    var dataLen = data.length;
+
+			    	    var allData = [];
+			    	    for(var i=0;i<dataLen;i++){
+			    	    	allData.push(data[i]);
+			    	    }
+			    		return allData;
+        	        },
+        	        {# 获得单击选中的行}
+    	            getSelection: function(){
+			    		var oTable = $('#${id}').dataTable();
+			    		var aData = oTable.fnGetData(oTable.$('tr.selected'));
+
+			    		var index = oTable.$('tr.selected').index();
+
+			    		if(aData == null){
+			    		   JrzlTools.alert("请选中一条数据后再执行操作。","提示");
+			    		   return null;
+			    		}else{
+			    			aData.index = index;
+			    			return aData;
+			    		}
+        	        },
+        	        {# 获得排序信息}
+        	        getSortInfo: function(){
+        	        	var oTable = $('#${id}').dataTable();
+        	        	var settings = oTable.fnSettings();
+        	        	var start = settings._iDisplayStart;
+        	        	var limit = settings._iDisplayLength;
+        	        	var sorts = _fnSortFlatten_${UUID}( settings );
+                      	var
+							columns = settings.aoColumns,
+							columnCount = columns.length;
+
+						var pageSize = limit;
+						var curPage	 = start/limit+1;
+
+						if(sorts == null || sorts.length == 0){
+						  return {pageSize:pageSize,curPage:curPage};
+						}
+						var sort = sorts[0];
+
+						var sortIndex = sort.col;
+						var sortDir = sort .dir;
+
+						var sortCol = columns[sortIndex].data;
+						var obj  = {sortCol:sortCol,sortDir:sortDir,pageSize:pageSize,curPage:curPage};
+						return obj;
+        	        },
+		    		{# load数据}
+		    		loadData: function(data){
+		    			$('#${id}').DataTable().clear().draw();
+		    			if(undefined !== data && null !== data && data.length !== 0){
+		    				$('#${id}').dataTable().fnClearTable(); 
+		    				$('#${id}').dataTable().fnAddData(data,true);
+		    			}
+    	            },
+    	            {# 新增空白行}
+    	            addRow : function(data){
+    	            	var table = $('#${id}').DataTable();
+    	            	table.row.add( data).draw();
+    	            },
+    	            {# 获得checkbox选中的数据}
+		    		getMultiSelection: function(){
+			    	    var selectIndexs = recordIndexs_${UUID};
+			    	    var selectLen = selectIndexs.length;
+			    	    var selectDatas=[];
+
+			    	    var table = $('#${id}').DataTable();
+			    		var data = table.data();
+
+			    		for(var i = 0;i<selectLen;i++){
+			    	    	 var record = data[selectIndexs[i]];
+			    	    	 record.index=selectIndexs[i];
+			    	    	 selectDatas.push(record);
+			    		}
+			    	    return selectDatas;
+    	            }
+
+};
+
+$(window).bind("resize",function(){
+	var table = $('#${id}').dataTable();
+	table.fnAdjustColumnSizing();
+});
+function _fnSortFlatten_${UUID}(settings) {
+	var i, iLen, k, kLen,
+		aSort = [],
+		aiOrig = [],
+		aoColumns = settings.aoColumns,
+		aDataSort, iCol, sType, srcCol,
+		fixed = settings.aaSortingFixed,
+		fixedObj = $.isPlainObject( fixed ),
+		nestedSort = [],
+		add = function ( a ) {
+			if ( a.length && ! $.isArray( a[0] ) ) {
+				nestedSort.push( a );
+			}
+			else {
+				nestedSort.push.apply( nestedSort, a );
+			}
+		};
+		if ( $.isArray( fixed ) ) {
+			add( fixed );
+		}
+		if ( fixedObj && fixed.pre ) {
+			add( fixed.pre );
+		}
+		add( settings.aaSorting );
+		if (fixedObj && fixed.post ) {
+			add( fixed.post );
+		}
+		for ( i=0 ; i<nestedSort.length ; i++ ) {
+			srcCol = nestedSort[i][0];
+			aDataSort = aoColumns[ srcCol ].aDataSort;
+			for ( k=0, kLen=aDataSort.length; k < kLen; k++ ) {
+				iCol = aDataSort[k];
+				sType = aoColumns[ iCol ].sType || 'string';
+				aSort.push( {
+					src:       srcCol,
+					col:       iCol,
+					dir:       nestedSort[i][1],
+					index:     nestedSort[i][2]
+				} );
+			}
+		}
+		return aSort;
+}
+
+{# 双击打开行内编辑器 }
+function buildInlineEditor(param) {
+	var table = $('#${id}').DataTable(),
+		$td  = $(this),
+		tdIndex = $td.index(),
+		trIndex = $td.parent().index(),
+		editType = param.data.EDIT_TYPE,
+		inlineOption = param.data.OPTION;
+
+	var width = $td.outerWidth(true),
+		height = $td.outerHeight(true),
+		align = $td.css("textAlign"),
+		paddingTop = $td.css("paddingTop"),
+		paddingRight = $td.css("paddingRight"),
+		paddingBottom = $td.css("paddingBottom"),
+		paddingLeft = $td.css("paddingLeft");
+
+	var valiCfg = {},
+		colCfgIndex = param.data.COLUMNCFG_INDEX;
+	{@each columns as column,index}
+		if('${index}' == colCfgIndex) {
+			valiCfg.allowBlank = '${column.allowBlank}';
+			valiCfg.isUnique = '${column.isUnique}';
+			valiCfg.maxLength = '${column.maxLength}';
+			valiCfg.regex = '${column.regex}';
+			valiCfg.regexText = '${column.regexText}';
+			valiCfg.type = '${column.type}';
+		}
+	{@/each}
+
+	{# 下拉选择 }
+	if(editType == "select") {
+		var selectId = 'select_${UUID}',
+			originalText = $td.text();
+
+		$td.unbind("dblclick");
+		$td.css({textAlign : "left", padding : "0"});
+
+		var $select = $("<select>", {
+			id : selectId,
+			style : "height:"+ height +"px;width:"+width+"px",
+			focusout: function() {
+				table.cell(trIndex, tdIndex).data($select.find("option:selected").text()).draw();
+				$td.css("textAlign", align);
+				$td.css("padding", paddingTop + " " + paddingRight + " " + paddingBottom + " " + paddingLeft);
+				$td.bind("dblclick", {EDIT_TYPE : editType, OPTION : inlineOption}, buildInlineEditor);
+			},
+			keydown:function(event) {
+				if (event.keyCode == 13) {
+					table.cell(trIndex, tdIndex).data($select.find("option:selected").text()).draw();
+					$td.css("textAlign", align);
+					$td.css("padding", paddingTop + " " + paddingRight + " " + paddingBottom + " " + paddingLeft);
+					$td.bind("dblclick", {EDIT_TYPE : editType, OPTION : inlineOption}, buildInlineEditor);
+				}
+			}
+		});
+		$td.html($select);
+		JrzlTools.loadSelectDomData([selectId], inlineOption,false, originalText);
+		$select.focus();
+	}
+	{# 日期 }
+	else if(editType == "date") {
+		var divId = 'date__${UUID}',
+			dateLeft = $td.position().left,
+			dateTop = $td.position().top + height;
+
+		if($td.offset().top + 175 + height > document.body.offsetHeight ){
+			dateTop = dateTop - ($td.offset().top + 175 + height - document.body.offsetHeight );
+		}
+
+		$("#"+ divId).remove();
+		var $div = $("<div>", {
+			id : divId,
+			style : "position:absolute; left:"+ dateLeft +"px;top:"+ dateTop +"px;z-index:100;"
+		}).appendTo($td);
+
+
+		WdatePicker({eCont : divId, onpicked : function(dp){
+			$td.text(dp.cal.getDateStr());
+			table.cell(trIndex, tdIndex).data($td.text()).draw();
+		}});
+
+	}
+	{# 其他 暂时input }
+	else {
+		var originalText = $td.text();
+
+		$td.unbind("dblclick");
+		$td.css({textAlign : "left", padding : "0"});
+
+		var $input = $("<input>", {
+			type : "text",
+			'class' : "editable",
+			style : "height:"+ height +"px;width:"+(width-5)+"px",
+			val : originalText,
+			focusout: function() {
+				var result = inlineValidate($input, valiCfg);
+				if(result.errorFlag != 0) {
+					$input.toggleClass("editable error");
+					JrzlTools.alert(result.errorMsg, "提示", function() {
+						table.cell(trIndex, tdIndex).data(originalText).draw();
+						$td.css("textAlign", align);
+						$td.css("padding", paddingTop + " " + paddingRight + " " + paddingBottom + " " + paddingLeft);
+						$td.bind("dblclick", {EDIT_TYPE : editType, COLUMNCFG_INDEX : colCfgIndex}, buildInlineEditor);
+					});
+				} else {
+					table.cell(trIndex, tdIndex).data($input.val()).draw();
+					$td.css("textAlign", align);
+					$td.css("padding", paddingTop + " " + paddingRight + " " + paddingBottom + " " + paddingLeft);
+					$td.bind("dblclick", {EDIT_TYPE : editType, COLUMNCFG_INDEX : colCfgIndex}, buildInlineEditor);
+				}
+
+			},
+			keydown: function(event) {
+				if (event.keyCode == 13) {
+					event.preventDefault();
+					var result = inlineValidate($input, valiCfg);
+					if(result.errorFlag != 0) {
+						$input.toggleClass("editable error");
+						JrzlTools.alert(result.errorMsg, "提示", function() {
+							table.cell(trIndex, tdIndex).data(originalText).draw();
+							$td.css("textAlign", align);
+							$td.css("padding", paddingTop + " " + paddingRight + " " + paddingBottom + " " + paddingLeft);
+							$td.bind("dblclick", {EDIT_TYPE : editType, COLUMNCFG_INDEX : colCfgIndex}, buildInlineEditor);
+						});
+					} else {
+						table.cell(trIndex, tdIndex).data($input.val()).draw();
+						$td.css("textAlign", align);
+						$td.css("padding", paddingTop + " " + paddingRight + " " + paddingBottom + " " + paddingLeft);
+						$td.bind("dblclick", {EDIT_TYPE : editType, COLUMNCFG_INDEX : colCfgIndex}, buildInlineEditor);
+					}
+				}
+			}
+		});
+		$td.html($input);
+
+		JrzlTools._moveCursorToEnd($input[0]);
+	}
+}
+
+function inlineValidate(ele, valiCfg) {
+	var val = $.trim(ele.val()),
+		result = {errorFlag : 0};
+	if(valiCfg.allowBlank == "false" && val == "") {
+		result.errorFlag = 1;
+		result.errorMsg = "不允许为空。";
+		return result;
+	}
+	if(valiCfg.maxLength != "null" && JrzlTools.getRealLength(val) > parseInt(valiCfg.maxLength)) {
+		result.errorFlag = 1;
+		result.errorMsg = "长度不能超过" + valiCfg.maxLength + "。";
+		return result;
+	}
+	if(valiCfg.type != "null" && !new RegExp(rules_${UUID}[valiCfg.type+"_rule"]).test(val)) {
+		result.errorFlag = 1;
+		result.errorMsg = rules_${UUID}[valiCfg.type+"_errorMsg"];
+		return result;
+	}
+	if(valiCfg.regex != "null" && !new RegExp(valiCfg.regex).test(val)) {
+		result.errorFlag = 1;
+		result.errorMsg = valiCfg.regexText;
+		return result;
+	}
+	return result;
+}
+
+</script>

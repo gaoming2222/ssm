@@ -1,0 +1,230 @@
+.user-items-pick {
+	border-style: none;
+	height: 100%;
+	padding: 0px !important;
+	background-color: #ECF0F3;
+}
+/* top begin */
+.user-items-pick  .search-area {
+	padding: 10px 10px 10px 10px;
+	overflow: hidden;
+}
+/* top-left begin  */
+.user-items-pick  .left-area {
+	float: left;
+	/*
+	width: 51%;
+	*/
+	width: 315px;
+	border: 1px solid #d0d0d0;
+}
+
+.user-items-pick .left-area .tree-area {
+	height: 205px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.user-items-pick .left-area .query-area {
+	padding: 5px 0px 5px 10px;
+	border-top: 1px solid #d0d0d0;
+}
+
+.user-items-pick .query-area input[type='text'] {
+	background-color: #fff;
+	border-color: #c2c9cf;
+	border-width: 1px;
+	border-style: Solid;
+	width: 220px;
+	padding: 4px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.TextWater{
+	color: #cccccc;
+}
+
+
+.user-items-pick .query-area input[type='button'] {
+	border-color: #c2c9cf;
+	border-width: 0px;
+	margin-left: 0px;
+	width: 50px;
+	height: 26px;
+	background: url(images/ButtonShort.png) no-repeat;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.user-items-pick .query-area input[type='button']:hover {
+	background: url(images/ButtonShortHover.png) no-repeat;
+}
+/* top-left end  */
+
+/* top-right begin  */
+.user-items-pick .right-area {
+	float: left;
+	/*
+	width: 40%;
+	*/
+	width: 210px;
+	border: 1px solid #d0d0d0;
+	border-left-style: none;
+}
+
+.user-items-pick .right-area .result-area {
+	height: 205px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.user-items-pick .right-area .operate-area {
+	padding: 5px 0px 5px 10px;
+	border-top: 1px solid #d0d0d0;
+}
+
+.user-items-pick .operate-area input[type='button'] {
+	border-color: #c2c9cf;
+	border-width: 0px;
+	/*
+	margin-left: 6px;
+	*/
+	width: 85px;
+	height: 26px;
+	background: url(images/ButtonNormal.png) no-repeat;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.user-items-pick .operate-area input[type='button']:hover {
+	background: url(images/ButtonNormalHover.png) no-repeat;
+}
+
+.user-items-pick .operate-area .add-button {
+	margin-right: 10px;
+}
+
+.user-items-pick .operate-area .cancel-button {
+	margin-left: 10px;
+}
+/* top-right end  */
+
+/* top end */
+
+/* assign-are begin */
+.user-items-pick .assign-area {
+	margin: 5px 10px 20px 10px;
+	height: 85px;
+	width: 526px;
+}
+
+.user-items-pick .assign-area .head-area {
+	height: 45px;
+	width: 65px;
+	background-color: #ECF0F3;
+	text-align: center;
+	border: 1px solid #d0d0d0;
+	float: left;
+	padding-top: 38px;
+	vertical-align: middle;
+}
+
+.user-items-pick .assign-area .chose-area {
+	height: 73px;
+	width: 418px;
+	float: left;
+	border: 1px solid #d0d0d0;
+	border-left-style: none;
+	border-right-style: none;
+	padding: 5px;
+	overflow-y: auto;
+}
+
+.user-items-pick .assign-area .clear-area {
+	height: 85px;
+	width: 31px;
+	float: right;
+	
+	cursor: pointer;
+	background: url(images/DeleteAll.png) no-repeat;
+}
+
+.user-items-pick .assign-area .clear-area:hover{
+	background: url(images/DeleteAllHover.png) no-repeat;
+}
+
+.user-items-pick .assign-area .clear-area:active{
+	background: url(images/DeleteAllClick.png) no-repeat;
+}
+/* assign-are end */
+
+
+.tree-items-pick-query-result-li {
+	width: 210px;
+	line-height: 25px;
+	margin-bottom: 3px;
+}
+
+.tree-items-pick-query-result-li:hover {
+	background-color: #e7eaef;
+	cursor: pointer;
+}
+
+.tree-items-pick-item-icon {cursor: pointer;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/Man.png) no-repeat;
+	margin: 5px 5px 5px 17px;
+	float: left;
+}
+
+.tree-items-pick-select-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/Select.png) no-repeat;
+	margin: -20px 50px 5px 150px;
+	float: left;
+}
+
+.tree-items-pick-up-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/Up.png) no-repeat;
+	margin: -20px 3px 5px 130px;
+	float: left;
+	cursor: pointer;
+}
+
+.tree-items-pick-down-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/Down.png) no-repeat;
+	margin: -20px 3px 5px 150px;
+	float: left;
+	cursor: pointer;
+}
+
+.tree-items-pick-div {
+	height: 16px;
+	display: inline-block;
+	margin: 0px 2px 0px 8px;
+	float: left;
+}
+
+.tree-items-pick-delete-icon {
+	width: 12px;
+	height: 14px;
+	display: inline-block;
+	background: url(images/Delete.png) no-repeat;
+	cursor: pointer;
+	vertical-align: middle;
+	margin: 0px 2px;
+}
+

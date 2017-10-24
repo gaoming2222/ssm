@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>规则明细</title>
+<script type="text/javascript" src="common/plugins/jsloader/codebase/jsloader.js" main="quotaruledtl.js"></script>
+</head>
+<body>
+	<form name="submitform" id="submitform" method="post">
+		<div class="outer-area">
+			<div class="title">
+				<span class="icon-title"></span><label class="text-title">规则明细</label>
+			</div>
+            <div class="inner-data-area">
+				<table class="detailTable">
+					<tr class="first">
+						<td class="head"><font>*</font>规则编号</td>
+						<td class="content">
+							<input type="text" id="RUL_ID" name="RUL_ID" value="GZBH0001" readonly="readonly" />
+						</td>
+						<td class="head"><font>*</font>额度编号</td>
+						<td class="content">
+							<input type = "text" id="QUO_ID" name="QUO_ID" value = "EDBH0001" readonly = "readonly" onchange=""/>
+						</td>
+					</tr>
+					<tr class="first">
+						<td class="head"><font>*</font>对应客户</td>
+						<td class="content">
+							<input type = "text" id = "CLIENT_NAM" name = "CLIENT_NAM" value = "高先生" readonly = "readonly" />
+						</td>
+						<td class="head"><font>*</font>债券类型</td>
+						<td class="content">
+							<select id="BOND_TYPE" name="BONE_TYPE" onchange=""  readonly = "readonly">
+							<option>期限</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="head">
+						<td class="head"><font>*</font>额度金额</td>
+						<td class="content">
+							<input type = "text" id = "QUO_NUM" name = "QUO_NUM" value = "100000" readonly = "readonly" />
+						</td>
+						<td class="head"><font>*</font>所在区间</td>
+						<td class="content">
+							<input type = "text" id = "RANGE" name = "RANGE" value = "0-4" readonly = "readonly" />
+						</td>
+					</tr>
+					<tr class="head">
+						<td class="head"><font>*</font>区间额度上限</td>
+						<td class="content">
+	                        <input type="text" id="BOND_NUM_TOP" name="BOND_NUM_TOP"  value="50000"  readonly = "readonly"/>
+						</td>
+						<td class="head"><font>*</font>总额度</td>
+						<td class="content clearRight">
+							<input type="text" id="QUO_ALL" name="QUO_ALL" value="200000"  readonly = "readonly"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="head"><font>*</font>额度期限起</td>
+						<td class="content">
+							 <select id = "DUE_DAT_STR" name = "DUE_DAT_STR" readonly = "readpnly">
+							 <option>1个月</option>
+							 </select>
+						</td>
+						<td class="head"><font>*</font>额度期限止</td>
+						<td class="content clearRight">
+							 <select id = "DUE_DAT_END" name = "DUE_DAT_END" readonly = "readonly">
+							 <option>12个月</option>
+							 </select>
+						</td>
+					</tr>
+					<tr>
+						<td class="head"><font>*</font>剩余可用额度</td>
+						<td class="content">
+							 <input type="text" id="REMIAN_QUO" name="REMIAN_QUO"  value="120000" readonly="readonly" />
+						</td>
+						<td class="head"><font>*</font>剩余额度上限</td>
+						<td class="content clearRight">
+							 <input type="text" id="REMIAN_QUO_TOP" name="REMIAN_QUO_TOP"  value="130000" readonly="readonly" />
+						</td>
+					</tr>
+					<tr>
+						<td class="head"><font>*</font>备注</td>
+						<td class="content">
+							 <input type="text" id="mark" name="mark" value="gagagdgfdfdsgfs" readonly = "readonly"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</form>
+	</body>
+	</html>

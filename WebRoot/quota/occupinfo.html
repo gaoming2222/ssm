@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html style="height: 100% !important;">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>占用信息</title>
+<script type="text/javascript"
+	src="common/plugins/jsloader/codebase/jsloader.js"
+	main="occupinfo.js"></script>
+</head>
+<body>
+	<form name="submitform" id="submitform" method="post">
+		<div class="outer-area">
+			<div class="title">
+				<span class="icon-title"></span> <label class="text-title">
+					占用信息 </label>
+			</div>
+			<div class="inner-search-area">
+				<div class="search-condition">
+					<table id="datatable">
+						<tr>
+							<td class="required"></td>
+							<td class="head">规则编号：</td>
+							<td class="content"><input type="text" id="RULE_ID"
+								name="RULE_ID" /></td>
+							<td class="required"></td>
+							<td class="head">核心客户名称：</td>
+							<td class="content"><input type="text" id="CORE_USER_ID"
+								name="CORE_USER_ID" /></td>
+						</tr>
+					</table>
+					<div class="search-button">
+						<input type="button" id="QUERY" name="QUERY"
+							onclick="query_onclick()" value="查询" />
+					</div>
+
+				</div>
+			</div>
+			<div class="inner-list-area">
+				<table id="maingrid"></table>
+			</div>
+	</form>
+</body>
+</html>

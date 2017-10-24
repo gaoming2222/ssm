@@ -1,0 +1,19 @@
+﻿{# 时间装饰函数}
+function(data, type, full, meta){
+		if(data==null || $.trim(data) == ''){
+		    return "";
+		}else if( data.length<8){
+		    return data;
+		}else{
+		    valueStr = data;
+		    var strTmp = valueStr.substr(0,4)+'-'+valueStr.substr(4,2)+'-'+valueStr.substr(6,2);
+		    if(valueStr.length>=12){
+		        strTmp+=' ' + valueStr.substr(8,2) + ':' + valueStr.substr(10,2);
+		    }
+		    if(valueStr.length>=14){
+		        strTmp+=':' + valueStr.substr(12,2);
+		    }
+		    return strTmp;
+		}
+
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>额度信息管理</title>
+	</head>
+<body>
+    <form name="submitform" id="submitform" method="post">
+        <div class="outer-area">
+            <div class="title">
+                <span class="icon-title"></span>
+                <label class="text-title">
+                	额度信息管理
+                </label>
+            </div>
+            <div class="inner-search-area">
+                <div class="search-condition">
+                    <table id="datatable">
+                        <tr>
+                             <td class="required"></td>
+                            <td class="head">额度编号：</td>
+                            <td class="content">
+                                <input type="text" id="QUOTA_ID" name="QUOTA_ID" />
+                            </td>
+                            <td class="required"></td>
+                            <td class="head">客户名称（编号）：</td>
+                            <td class="content">
+                                <input type="text" id="CLIENT_NAM" name="CLIENT_NAM" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="required"></td>
+                            <td class="head">期限起：</td>
+                            <td class="content">
+                                <input type="text" id="VAL_DTE_STRT" name="VAL_DTE_STRT" class="range-date"/>
+                                到
+                                <input type="text" id="VAL_DTE_END" name="VAL_DTE_END" class="range-date"/>
+                            </td>
+                            <td class="required"></td>
+                            <td class="head">期限止：</td>
+                            <td class="content">
+                                <input type="text" id="DUE_DTE_STRT" name="DUE_DTE_STRT" class="range-date"/>
+                                到
+                                <input type="text" id="DUE_DTE_END" name="DUE_DTE_END" class="range-date"/>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td class="required"></td>
+                            <td class="head">总额度：</td>
+                            <td class="content">
+                                <input type="text" id="TOT_QUO_STRT" name="TOT_CST_STRT" class="range-date"/>
+                                到
+                                <input type="text" id="TOT_QUO_END" name="TOT_CST_END" class="range-date"/>
+                            </td>
+                            <td class="required"></td>
+                            <td class="head">剩余额度：</td>
+                            <td class="content">
+                                <input type="text" id="REMAIN_QUO_STRT" name="REMAIN_QUO_STRT" class="range-date"/>
+                                到
+                                <input type="text" id="REMAIN_QUO_END" name="REMAIN_QUO_END" class="range-date"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="search-button">
+                        <input type="button" id="QUERY" name="QUERY" onclick="query_onclick()" value="查询" />
+                        <input type="button" id="selAll" class="more-condition-down" onclick="JrzlTools.moreSearchConditionToggle(this)"/>
+                    </div>
+
+            </div>
+            </div>
+
+            <div class="inner-button-area">
+                <div class="function-button">
+                    <input type="button" id="ADD" name="ADD" onclick="add_onclick()" value="新增"/>
+                     <input type="button" id="CHECK" name="CHECK" onclick="check_onclick()"  value="查看" >
+                    <input type="button" id="MODIFY" name="MODIFY" onclick="modify_onclick()"  value="复核与审批" >
+                    <input type="button" id="MODIFYBATCH" name="MODIFYBATCH" onclick="modifybatch_onclick()" style="display: none; value="批量审批"/>
+                    <input type="button" id="RECALL" name="RECALL" onclick="modify_onclick()" value="更新"/>
+                    <input type="button" id="DELETE" name="DELETE" onclick="delete_onclick()" value="删除"/>
+                </div>
+            </div>
+            <div class="inner-list-area">
+                <table id="prvGrid"></table>
+            </div>
+
+        </div>
+    </form>
+	    <!-- 进度条窗口 -->
+	  <div id="batch_Operator" style="display: none;">
+	  <div id="processbar" style="display: none;margin: 66px 20px 0px 20px;"></div>
+	  <div style="margin: 5px 20px 0px 20px;">
+	   <textarea id="errText" rows="6" style="resize:none;overflow:auto;width:100%; border-width:0px;background-color: #f3f4f6" readonly></textarea>
+	  </div>
+	  <div class="bottom-button-area" id="button_operate_div" style="margin-top:0px;display:none">
+	           <input type="button" id="" name="" onclick="close_operate()" value="关闭" />
+	  </div>
+	  </div>
+	</body>
+	<script type="text/javascript" src="common/plugins/jsloader/codebase/jsloader.js" main="quotainfomng.js"></script>
+</html>

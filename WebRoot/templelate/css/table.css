@@ -1,0 +1,39 @@
+.mytable{
+	border-collapse:collapse;
+	width:750px;
+	margin-top:100px;
+}
+.mytable thead{
+	background-color:#97CBFF;
+	height:38px;
+	font-weight:bold;
+}
+.mytable tbody{
+	background-color:#FAF4FF;
+	color:green;
+}
+.mytable td{
+	border:1px solid blue;
+	width:20%;
+	height:30px;
+	text-align:center;
+}
+
+.mytable td input[type=text]{
+	width:93%;
+	height:24px;
+	background-color:#D3A4FF;
+	border:1px solid #FAF4FF;
+	border-radius:4px;
+	color:blue;
+}
+
+.mytable td input[type=button]{
+	width:50%;
+	height:24px;
+	background-color:#84CEFF;
+	border:1px solid #FAF4FF;
+	border-radius:4px;
+	color:gray;
+	font-weight:bold;
+}

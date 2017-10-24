@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>额度信息新增</title>
+<script type="text/javascript" src="common/plugins/jsloader/codebase/jsloader.js" main="quotainfo.js"></script>
+</head>
+<body>
+	<form name="submitform" id="submitform" method="post">
+		<div class="outer-area">
+			<div class="title">
+				<span class="icon-title"></span><label class="text-title">额度信息新增</label>
+			</div>
+            <div class="top-button-area" >
+            	<input type="button" id="SAVEtop" name="SAVEtop" onclick="save_onclick()" value="保存" />
+				<input type="button" id="SUBMITtop" name="SUBMITtop" onclick="save_onclick('Y')" value="提交" />
+            </div>
+            <div class="inner-data-area">
+				<table class="detailTable">
+					<tr class="first">
+						<td class="head"><font>*</font>申请编号</td>
+						<td class="content">
+							<input type="text" id="APPL_COD" name="APPL_COD" value="" readonly="readonly" />
+							<span style="color: Gray">自动赋值</span>
+						</td>
+						<td class="head"><font>*</font>币种</td>
+						<td class="content">
+							<select id="CURRENCY" name="CURRENCY" onchange="">
+							</select>
+						</td>
+					</tr>
+					<tr class="first">
+						<td class="head"><font>*</font>总额度</td>
+						<td class="content">
+							 <input type="text" id="TOT_CST" name="TOT_CST" value=""/>
+						</td>
+						<td class="head"><font>*</font>循环使用</td>
+						<td class="content">
+							<select id="CYCLE_USE" name="CYCLE_USE" onchange="">
+							</select>
+						</td>
+					</tr>
+					<tr class="head">
+						<td class="head"><font>*</font>同业客户</td>
+						<td class="content">
+							<select id="CORR_CUSTOMER" name="CORR_CUSTOMER" onchange="">
+							</select>
+							<span style="color: Gray">自动赋值</span>
+						</td>
+						<td class="head"><font>*</font>集团客户</td>
+						<td class="content">
+							<select id="GRP_CUSTOMER" name="GRP_CUSTOMER" onchange="">
+							</select>
+						</td>
+					</tr>
+					<tr class="head">
+						<td class="head"><font>*</font>核心系统客户号</td>
+						<td class="content">
+	                        <input type="text" id="CORE_SYS_CLIENT_ID" name="CORE_SYS_CLIENT_ID" value="" />
+	                        <input type="button" id="SELECT_USER_INFO"
+	                            class="choose-button" onclick="selectCifUserInfo()"
+	                            title="选择">
+						</td>
+						<td class="head"><font>*</font>核心系统客户名称</td>
+						<td class="content clearRight">
+							<input type="text" id="CORE_SYS_CLIENT_NAM" name="CORE_SYS_CLIENT_NAM" value="" />
+							<span style="color: Gray">自动赋值</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="head"><font>*</font>起始日</td>
+						<td class="content">
+							 <input type="text" id="VAL_DTE" name="VAL_DTE" />
+							 <span id="VAL_DTE_WEEKDAY" style="color: Blue"></span>
+						</td>
+						<td class="head"><font>*</font>到期日</td>
+						<td class="content clearRight">
+							 <input type="text" id="DUE_DTE" name="DUE_DTE" />
+							 <span id="DUE_DTE_WEEKDAY" style="color: Blue"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="head"><font>*</font>公募额度上限</td>
+						<td class="content">
+							 <input type="text" id="PUB_QUO_TOP" name="PUB_QUO_TOP" onblur="" onfocus="" />
+						</td>
+						<td class="head"><font>*</font>私募额度上限</td>
+						<td class="content clearRight">
+							 <input type="text" id="PRI_QUO_TOP" name="PUB_QUO_TOP" onblur="" onfocus="" />
+						</td>
+					</tr>
+					<tr>
+
+					</tr>
+                    <tr class="head">
+                    	<td colspan="4" class="titleBar">
+                    		<font style="color: red">*</font>规则信息
+                        </td>
+                    </tr>
+                    <tr>
+						<td colspan="4" class="content" >
+							<div class="top-button-area">
+								<div style="float: left; padding-left: 10px;">
+									<input type="button" id="ADD_RULE_INFO" name="ADD_RULE_INFO" onclick="addRuleInfo_onclick()" value="新 增" />
+									<input type="button" id="EDI_RULE_INFO" name="EDI_RULE_INFO" onclick="editRuleInfo_onclick()" value="修 改" />
+									<input type="button" id="DELETE_RULE_INFO" name="DELETE_RULE_INFO" onclick="deleteRuleInfo_onclick()" value="删 除" />
+								</div>
+							</div>
+							<table id="gridRuleInfo"></table>
+						</td>
+					</tr>
+					<!--  <tr class="head">
+                    	<td colspan="4" class="titleBar">
+                    		附件上传
+                        </td>
+
+                    </tr>
+                    <tr>
+						<td colspan="4" class="content" >
+							<div class="inner-list-area">
+								<div class="top-button-area">
+									<div style="float: left; padding-left: 10px;">
+										<input type="button" id="UPLOAD_ATCH" onclick="uploadAtch_onclick()" value="上传" />
+										<input type="button" id="DELETE_ATCH" onclick="deleteAtch_onclick()" value="删除" />
+										<input type="button" id="DOWNLOAD_ATCH" onclick="downloadAtch_onclick()" value="下载" />
+										<input type="button" id="DOWNLOADALL_ATCH" onclick="downloadAllAtch_onclick()" value="全部下载" />
+									</div>
+								</div>
+								<table id="atchGrid"></table>
+							</div>
+						</td>
+					</tr>
+					-->
+				</table>
+			</div>
+			<div class="bottom-button-area">
+				<input type="button" id="SAVEbottom" name="SAVEbottom" onclick="save_onclick()" value="保存" />
+				<input type="button" id="SUBMITbottom" name="SUBMITbottom" onclick="save_onclick('Y')" value="提交" />
+			</div>
+		</div>
+	</form>
+
+	 <!-- 规则信息新增修改 start -->
+    <div id="addRuleInfo" class="outer-area" style="display: none;">
+        <div class="inner-data-area" style="border: none;">
+            <table class="detailTable">
+                <tr>
+                    <td class="head">
+                        <font>*</font>控制类型
+                    </td>
+                    <td class="content clearRight">
+                        <select id="CONTROL_TYPE" name="CONTROL_TYPE" onchange="onChangeControlType()">
+					    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="head">
+                        <font>*</font>债券类型
+                    </td>
+                    <td class="content clearRight">
+                        <select id="BOND_TYPE" name="BOND_TYPE">
+					    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="head">
+                        <font>*</font>债券全称
+                    </td>
+                    <td class="content clearRight">
+                        <input type="text" id="BOND_NAM" name="BOND_NAM"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="head">
+                        <font>*</font>额度期限起
+                    </td>
+                    <td class="content clearRight">
+                        <select id="QUO_DAT_STR" name="QUO_DAT_STR">
+					    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="head">
+                        <font>*</font>额度期限止
+                    </td>
+                    <td class="content clearRight">
+                        <select id="QUO_DAT_END" name="QUO_DAT_END">
+					    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="head">
+                        <font>*</font>额度金额
+                    </td>
+                    <td class="content clearRight">
+                        <input type="text" id="QUO_NUM" name="QUO_NUM"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="2">
+                        <input type='button' class="common-button"
+                            style="margin-right: 10px; text-align: center;"
+                            onclick='saveRuleInfo_onclick()' value='确定' />
+                        <input type='button' class="common-button"
+                            style="text-align: center;"
+                            onclick='closeRuleInfo_onclick()' value='关闭' />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- 规则信息新增修改 end -->
+
+ 	<!-- 附件上传界面 start -->
+	<!--  <div id="showUploadAtch" style="display: none; padding: 10px; overflow: hidden;">
+		<div id="uploader_ATCH" class="upload-area" file=""></div>
+		<div class="button-area">
+			<input type="button" class='common-button' style="margin-right: 10px;" onclick="uploadAtch()" value="确定" />
+			<input type="button" class='common-button' onclick="closeAtch_onclick()" value="取消 " />
+		</div>
+	</div>
+	-->
+
+	<!-- 附件上传界面 end -->
+</body>
+</html>

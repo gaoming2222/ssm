@@ -1,0 +1,142 @@
+/*alert���� css --start-- */
+#popup_container {
+	font-family: 12px "宋体";
+	width: 370px; /* Dialog will be no smaller than this */
+	color: #000;
+}
+/* 头部拼图 */
+.popup_headerLf {
+	position: absolute;
+	width: 6px;
+	height: 40px;
+	background: url(images/TitleLeft.png) no-repeat left top;
+	float: left;
+}
+
+.popup_headerRt {
+	width: 6px;
+	height: 40px;
+	background: url(images/TitleRight.png) no-repeat left top;
+	float: right;
+}
+
+#popup_header {
+	background: url(images/TitleBg.png) repeat-x;
+	height: 40px;
+	margin: 0 6px 0 6px;
+}
+/* 底部拼图 */
+.popup_footerLf {
+	position: absolute;
+	width: 6px;
+	height: 40px;
+	background: url(images/FooterLeft.png) no-repeat left top;
+	float: left;
+}
+
+.popup_footerRt {
+	width: 6px;
+	height: 40px;
+	background: url(images/FooterRight.png) no-repeat left top;
+	float: right;
+}
+
+#popup_footer {
+	background: url(images/FooterBg.png) repeat-x;
+	height: 40px;
+	margin: 0 6px 0 6px;
+	/* border: solid 0px #FFF;
+	border: solid 1px #dddddd; */
+}
+
+#popup_titleIcon {
+	background: url(images/TitleIcon.png) no-repeat;
+	width: 14px;
+	height: 14px;
+	float: left;
+	margin: 10px 5px 0px 5px;
+}
+
+#popup_title {
+	font: 14px Microsoft YaHei !important;
+	font-weight: bold;
+	line-height: 34px !important;
+	float: left;
+}
+
+#popup_content {
+	background-color: #f3f4f5;
+	height: 135px;
+	width: 370px;
+	display: table;
+}
+
+#popup_message {
+	margin: auto;
+	text-align: center;
+	position: relative;
+	word-break:break-all;
+	padding: 0px 30px;
+	line-height: 150%;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+#popup_panel {
+	text-align: center;
+	margin: 0em 0em 0em 1em;
+	marigin-left: 30px;
+}
+
+#popup_prompt {
+	margin: .5em 0em;
+}
+
+#popup_ok {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(images/ButtonNormal.png) no-repeat !important;
+	margin-top: 7px;
+}
+
+#popup_ok:hover {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(images/ButtonNormalHover.png) no-repeat !important;
+}
+
+#popup_cancel {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(images/ButtonNormal.png) no-repeat !important;
+	margin-left: 10px;
+}
+
+#popup_cancel:hover {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(images/ButtonNormalHover.png) no-repeat !important;
+}
+
+#popup_close_btn {
+	background: url(images/CloseBig.png) no-repeat !important;
+	width: 18px;
+	height: 18px;
+	float: right;
+	margin-top: 8px;
+	margin-right: 5px;
+}
+
+#popup_close_btn:hover {
+	background: url(images/CloseBigHover.png) no-repeat !important;
+	cursor: pointer;
+}
+/*alert���� css --end-- */

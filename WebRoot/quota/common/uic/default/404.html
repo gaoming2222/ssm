@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript">
+function getDeployName(){
+	var localUrl = window.location.href;
+	var deploy = localUrl.split('/');
+	if(deploy.length > 3){
+		return deploy[3];
+	}
+	return '';
+}
+document.write("<link href='/"+ getDeployName() +"/common/uic/default/css/common.css' rel='stylesheet' type='text/css'/>");
+document.write("<script src='/"+ getDeployName() +"/common/plugins/jQuery-1.8.2/jquery.min.js'><\/script>");
+document.write("<script src='/"+ getDeployName() +"/common/uic/default/404.js'><\/script>");
+
+</script>
+<title>出错</title>
+</head>
+<body>
+<div class="common-error-bg">
+ <div class="common-error-content">
+   <div class="common-error-header"></div>
+   <div id="common_error_msg" class="common-error-msg"></div>
+ </div>
+</div>
+</body>
+</html>

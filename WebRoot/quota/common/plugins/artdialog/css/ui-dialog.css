@@ -1,0 +1,234 @@
+/*!
+ * ui-artdialog.css
+ * Date: 2014-07-03
+ * https://github.com/aui/artDialog
+ * (c) 2009-2014 TangBin, http://www.planeArt.cn
+ *
+ * This is licensed under the GNU LGPL, version 2.1 or later.
+ * For details, see: http://www.gnu.org/licenses/lgpl-2.1.html
+ */
+.ui-artdialog {
+    *zoom:1;
+    _float: left;
+    position: relative;
+    background-color: #FBF9E0;
+    border: 1px solid #eea65f;
+    border-radius: 6px;
+    outline: 0;
+    background-clip: padding-box;
+    font-family: Helvetica, arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.428571429;
+    color: #333;
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: -webkit-transform .15s ease-in-out, opacity .15s ease-in-out;
+    transition: transform .15s ease-in-out, opacity .15s ease-in-out;
+   	overflow:visible;
+}
+.ui-popup-show .ui-artdialog {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.ui-popup-focus .ui-artdialog {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+.ui-popup-modal .ui-artdialog {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 0 256px rgba(255, 255, 255, .3);
+}
+.ui-artdialog-grid {
+    width: auto;
+    margin: 0;
+    border: 0 none;
+    border-collapse:collapse;
+    border-spacing: 0;
+    background: transparent;
+}
+
+.ui-artdialog-body {
+    padding: 0;
+    border: 0 none;
+    text-align: left;
+    background: transparent;
+}
+
+
+
+.ui-artdialog-body {
+    padding: 7px 6px 6px 5px;
+    text-align: center;
+   /* max-width: 430px;
+     overflow-x:hidden; 
+     display: inline-block;
+     *+max-width: auto;*/
+}
+.ui-artdialog-content {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    *zoom: 1;
+    *display: inline;
+    text-align: left;
+    background-color: #FBF9E0 !important;
+    /* 80274970超长单词换行 */
+    word-break:break-all;
+	word-wrap:break-word;
+}
+
+.ui-popup-top-left .ui-artdialog,
+.ui-popup-top .ui-artdialog,
+.ui-popup-top-right .ui-artdialog {
+    top: -8px;
+}
+.ui-popup-bottom-left .ui-artdialog,
+.ui-popup-bottom .ui-artdialog,
+.ui-popup-bottom-right .ui-artdialog {
+    top: 8px;
+}
+.ui-popup-left-top .ui-artdialog,
+.ui-popup-left .ui-artdialog,
+.ui-popup-left-bottom .ui-artdialog {
+    left: -8px;
+}
+.ui-popup-right-top .ui-artdialog,
+.ui-popup-right .ui-artdialog,
+.ui-popup-right-bottom .ui-artdialog {
+    left: 8px;
+}
+
+.ui-artdialog-arrow-a,
+.ui-artdialog-arrow-b {
+    position: absolute;
+    display: none;
+    width: 0;
+    height: 0;
+    overflow:hidden;
+    _color:#FBF9E0;
+    _filter:chroma(color=#FBF9E0);
+    border:8px dashed transparent !important;
+}
+.ui-popup-follow .ui-artdialog-arrow-a,
+.ui-popup-follow .ui-artdialog-arrow-b{
+    display: block;
+}
+.ui-popup-top-left .ui-artdialog-arrow-a,
+.ui-popup-top .ui-artdialog-arrow-a,
+.ui-popup-top-right .ui-artdialog-arrow-a {
+    bottom: -16px;
+    border-top:8px solid #eea65f !important;
+}
+.ui-popup-top-left .ui-artdialog-arrow-b,
+.ui-popup-top .ui-artdialog-arrow-b,
+.ui-popup-top-right .ui-artdialog-arrow-b {
+    bottom: -15px;
+    border-top:8px solid #FBF9E0 !important;
+}
+.ui-popup-top-left .ui-artdialog-arrow-a,
+.ui-popup-top-left .ui-artdialog-arrow-b  {
+    left: 15px;
+}
+.ui-popup-top .ui-artdialog-arrow-a,
+.ui-popup-top .ui-artdialog-arrow-b  {
+    left: 50%;
+    margin-left: -8px;
+}
+.ui-popup-top-right .ui-artdialog-arrow-a,
+.ui-popup-top-right .ui-artdialog-arrow-b {
+    right: 15px;
+}
+.ui-popup-bottom-left .ui-artdialog-arrow-a,
+.ui-popup-bottom .ui-artdialog-arrow-a,
+.ui-popup-bottom-right .ui-artdialog-arrow-a {
+    top: -16px;
+    border-bottom:8px solid #eea65f !important;
+}
+.ui-popup-bottom-left .ui-artdialog-arrow-b,
+.ui-popup-bottom .ui-artdialog-arrow-b,
+.ui-popup-bottom-right .ui-artdialog-arrow-b {
+    top: -15px;
+    border-bottom:8px solid #FBF9E0 !important;
+}
+.ui-popup-bottom-left .ui-artdialog-arrow-a,
+.ui-popup-bottom-left .ui-artdialog-arrow-b {
+    left: 15px;
+}
+.ui-popup-bottom .ui-artdialog-arrow-a,
+.ui-popup-bottom .ui-artdialog-arrow-b {
+    margin-left: -8px;
+    left: 50%;
+}
+.ui-popup-bottom-right .ui-artdialog-arrow-a,
+.ui-popup-bottom-right .ui-artdialog-arrow-b {
+    right: 15px;
+}
+.ui-popup-left-top .ui-artdialog-arrow-a,
+.ui-popup-left .ui-artdialog-arrow-a,
+.ui-popup-left-bottom .ui-artdialog-arrow-a {
+    right: -16px;
+    border-left:8px solid #7C7C7C;
+}
+.ui-popup-left-top .ui-artdialog-arrow-b,
+.ui-popup-left .ui-artdialog-arrow-b,
+.ui-popup-left-bottom .ui-artdialog-arrow-b {
+    right: -15px;
+    border-left:8px solid #fff;
+}
+.ui-popup-left-top .ui-artdialog-arrow-a,
+.ui-popup-left-top .ui-artdialog-arrow-b {
+    top: 15px;
+}
+.ui-popup-left .ui-artdialog-arrow-a,
+.ui-popup-left .ui-artdialog-arrow-b {
+    margin-top: -8px;
+    top: 50%;
+}
+.ui-popup-left-bottom .ui-artdialog-arrow-a,
+.ui-popup-left-bottom .ui-artdialog-arrow-b {
+    bottom: 15px;
+}
+.ui-popup-right-top .ui-artdialog-arrow-a,
+.ui-popup-right .ui-artdialog-arrow-a,
+.ui-popup-right-bottom .ui-artdialog-arrow-a {
+    left: -16px;
+    border-right:8px solid #7C7C7C;
+}
+.ui-popup-right-top .ui-artdialog-arrow-b,
+.ui-popup-right .ui-artdialog-arrow-b,
+.ui-popup-right-bottom .ui-artdialog-arrow-b {
+    left: -15px;
+    border-right:8px solid #fff;
+}
+.ui-popup-right-top .ui-artdialog-arrow-a,
+.ui-popup-right-top .ui-artdialog-arrow-b {
+    top: 15px;
+}
+.ui-popup-right .ui-artdialog-arrow-a,
+.ui-popup-right .ui-artdialog-arrow-b {
+    margin-top: -8px;
+    top: 50%;
+}
+.ui-popup-right-bottom .ui-artdialog-arrow-a,
+.ui-popup-right-bottom .ui-artdialog-arrow-b {
+    bottom: 15px;
+}
+
+
+@-webkit-keyframes ui-artdialog-loading {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes ui-artdialog-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+

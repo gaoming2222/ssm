@@ -1,0 +1,669 @@
+<script>
+{@if localItems!=null}
+	var localItems_${UUID} = ${localItems};
+{@/if}
+var index_${UUID} = 0;
+
+var totalText_${UUID} = "总合计",
+	pageTotalText_${UUID} = "本页合计";
+
+var recordDatas_${UUID}={};
+var lastPageSize_${UUID}=0;
+var lastSortInfo_${UUID} = null;
+
+$(document).ready(function() {
+	$('#${id}').dataTable( {
+	    {@if isAjaxRequest==false}
+	      "data" :localItems_${UUID},
+	      "pageLength": ${pageSize},   {# 分页大小}
+	      "pagingType": "full_numbers",{# 分页按钮类型}
+	    {@else}
+		  "pagingType": "full_numbers",{# 分页按钮类型}
+		  "pageLength": ${pageSize},   {# 分页大小}
+		  "orderMulti": false,         {# 是否允许多列排序}
+		  "serverSide": true,          {# 服务器端分页}
+		  "ajax": {
+	         "url": '${url}',          {# 查询url}
+	         "type":"POST",
+	         "dataSrc": "__PagingResult.data",
+	         "timeout": 1000*60*60
+	      },
+	      "pageSizeUrl":"${pageSizeUrl}",
+	      "fnServerParams": function( aoData ) {# 请求参数}
+		  {
+			aoData.push(
+			        {"name":"_EXTREQUEST_FROMAJAX","value":"${pagingInfo}"}
+			        {@each paramList as param,index}
+			           ,{"name":'${param.name}',"value":'${param.value}'}
+					{@/each}
+
+				)
+		  },
+		  "autoLoad":${initable},       {# 初始化时是否加载数据}
+	      {# "stateSave": true,}
+	      "processing": true,
+	    {@/if}
+	      "isFloat" : ${isFloat},		{# isFloat为true时，鼠标hover显示浮动信息，为false时，鼠标hover显示所有内容}
+	      "order": [],                 {# 初始化时的排序规则}
+	      "searching": ${searching},
+	      "searchInput":${searchInput},
+	      "bDeferRender": true,
+	      {@if pagingInfo == false}
+		      "info":false,
+		      "paging": false,
+	      {@/if}
+	      {@if footerBar == false}
+		  "dom": 'T<"clear">lfrtip',
+		  {@/if}
+	      "bAutoWidth":false,
+	      {@if height != "auto"}
+	      "scrollY": ${height},
+	      {@/if}
+	      {@if scrollX }
+	      "scrollX": 'auto',
+	      {@/if}
+	      "lengthChange":false,
+	      "multipleSelection": true,
+	      "lengthMenu": [20, 50, 100],
+	      "aoColumns": [
+	                {@if needCheckBox}
+	                    {
+	                    	{@if scrollX }
+                 				"sWidth": '40px',
+                 			{@else}
+	                    		"sWidth": '5%',
+                 			{@/if}
+		                	"orderable": false,
+		                    "render": function ( data, type, full, meta ) {
+		                    	index_${UUID} = index_${UUID}+1;
+		                    	{@if disableTopCheckBox }
+			                    	if(full['CHECKED']){
+			                    		return '<div class="DataTables_sort_wrapper-noSort"><input type="checkbox" disabled="disabled" checked="checked" name="DATATABLESSINGLESELECT_' + index_${UUID} + '" onclick="dataTables_SingleSelect_${UUID}(this)"/></div>'
+			                    	}
+			                    	else{
+			                    		return '<div class="DataTables_sort_wrapper-noSort"><input type="checkbox" disabled="disabled" name="DATATABLESSINGLESELECT_' + index_${UUID} + '" onclick="dataTables_SingleSelect_${UUID}(this)"/></div>';
+			                    	}
+		                    	{@else}
+			                    	if(full['CHECKED']){
+			                    		return '<div class="DataTables_sort_wrapper-noSort"><input type="checkbox" checked="checked" name="DATATABLESSINGLESELECT_' + index_${UUID} + '" onclick="dataTables_SingleSelect_${UUID}(this)"/></div>'
+			                    	}
+			                    	else{
+			                    		return '<div class="DataTables_sort_wrapper-noSort"><input type="checkbox" name="DATATABLESSINGLESELECT_' + index_${UUID} + '" onclick="dataTables_SingleSelect_${UUID}(this)"/></div>';
+			                    	}
+		                    	{@/if}
+		                     },
+		                     className:"center datatables-inner-td",
+		                     {@if disableTopCheckBox }
+		                     	"title":'<input  type="checkbox" disabled="disabled" name="DATATABLESALLSELECT" id="DATATABLESALLSELECT_${UUID}" ondblclick="this.click()" onclick="dataTables_AllSelect_${UUID}()"/>'
+		                     {@else}
+		                     	"title":'<input  type="checkbox" name="DATATABLESALLSELECT" id="DATATABLESALLSELECT_${UUID}" ondblclick="this.click()" onclick="dataTables_AllSelect_${UUID}()"/>'
+		                     {@/if}
+	                    },
+	                {@/if}
+	      			{@if needOrderNum}
+		      			{
+		      				{@if scrollX }
+		      					"sWidth": '50px',
+		      				{@else}
+		      				"sWidth": '${indexWidth}',
+		      				{@/if}
+		      				"orderable": false,
+		      				"render": function ( data, type, full, meta ){
+		      					return"";
+		      				},
+		      				className:"center datatables-inner-td",
+		      				"title":"序号",
+		      				"isOrderCol" : true
+						},
+	                 {@/if}
+	                 {@each columns as column,index}
+		               {@if index!=0}
+		                 ,
+		               {@/if}
+		               {   title: '${column.title}',
+		                   data: '${column.property}',
+		                   thBorder:'${column.thBorder}',
+
+		                   {@if isFloat == true} {# isFloat为true时，鼠标hover显示浮动信息，为false时，鼠标hover显示所有内容}
+		                   		className:'${column.align} datatables-inner-td',
+		                   {@else}
+		                   		className:'${column.align} datatables-inner-td-nonefloat',
+		                   {@/if}
+
+		                   {@if column.width!=null}
+		                    "sWidth":'${column.width}',
+		                   {@/if}
+		                   visible: !${column.hidden},
+		                   {@if column.displayItems!=null}
+		                    	render: {@include "#"+pathLevel+"common/juicertpl/querygrid/child/displayItems.jcr", column},
+		                   {@else if column.decorator == 'MoneyDecorator'}
+		                    	render:$.fn.dataTable.render.number( '\,', '.', 2, '' ,'${column.moneyException}' ),
+		                   {@else if column.decorator != null}
+		                    	render: {@include "#"+pathLevel+"common/juicertpl/querygrid/child/"+column.decorator+".jcr", column},
+		                   {@else}
+		                    	render: ${column.renderer},
+		                   {@/if}
+		                   {@if column.hidden == true} {# 隐藏列,默认不启用排序选项}
+		                   		orderable: false
+		                   {@else}
+		                   		orderable: ${column.sortable}
+		                   {@/if}
+	                    }
+		             {@/each}
+	    		],
+	     "drawCallback":function( settings ) {
+	     		
+	    	   index_${UUID} = 0;
+	           var oTable = $('#${id}').dataTable(),
+	           		table = $('#${id}').DataTable(),
+	           		len = table.data().length,
+	           		orderColIndex = 0;
+	           {@if needCheckBox}
+	           	  orderColIndex = 1;
+	           {@/if}
+	           {@if needOrderNum}
+	              table_rows = oTable.fnGetNodes();
+	              {@if isAjaxRequest==false}
+	                  $.each(table_rows, function(index){
+	                        $("td:eq("+orderColIndex+")", this).html(index+1);
+	                  });
+                  {@else}
+                      var settings = oTable.fnSettings();
+                      var displayStart = settings._iDisplayStart;
+                      $.each(table_rows, function(index){
+	                        $("td:eq("+orderColIndex+")", this).html(displayStart+index+1);
+	                  });
+                  {@/if}
+	           {@/if}
+
+		    	$('#${id} tbody tr').unbind( 'click');
+		        $('#${id} tbody tr').bind( 'click', function () {
+		        	oTable.$('tr.selected').removeClass('selected');
+		        	$(this).addClass('selected');
+		        });
+		        {@if rowdbclick!=null}
+		           $('#${id} tbody tr').unbind("dblclick");
+	               $('#${id} tbody tr').bind( 'dblclick', function () {
+	                   ${rowdbclick}();
+		           });
+                {@/if}
+		    	var $checkbox = $("#${id} input[name^='DATATABLESSINGLESELECT_']");
+   			 	var table = $('#${id}').DataTable();
+   				var data = table.data();
+   				var oTable = $('#${id}').dataTable();
+	        	var settings = oTable.fnSettings();
+	        	var curPage = settings._iDisplayStart/settings._iDisplayLength;
+	        	{#  比较分页信息}
+	        	if(lastPageSize_${UUID} != settings._iDisplayLength){
+	        		recordDatas_${UUID}= {};
+	        		lastPageSize_${UUID} = settings._iDisplayLength;
+	        	}
+	        	var sorts = _fnSortFlatten_${UUID}( settings );
+	        	var sort = sorts[0];
+	        	{# 比较排序信息, 包括 col、dir}
+				if(lastSortInfo_${UUID} !== null){
+					if(sorts == null || sorts.length == 0){
+						recordDatas_${UUID}= {};
+	        			lastSortInfo_${UUID} = null;
+					}else{
+						if(lastSortInfo_${UUID}.col !==  sort.col || lastSortInfo_${UUID}.dir !==  sort.dir){
+							recordDatas_${UUID}= {};
+	        				lastSortInfo_${UUID}["col"] = sort.col ;
+	        				lastSortInfo_${UUID}["dir"] = sort.dir ;
+						}
+					}	
+				}else{
+					if(sorts !== null && sorts.length != 0){
+						recordDatas_${UUID}= {};
+						lastSortInfo_${UUID} = {};
+        				lastSortInfo_${UUID}["col"] = sort.col ;
+        				lastSortInfo_${UUID}["dir"] = sort.dir ;
+					}
+				}
+    	
+	        	var displayStart = 0;
+	        	if(${haveUrl} == false){
+   						displayStart = settings._iDisplayStart;
+   						settings._iRecordsTotal =data.length ;
+   				}
+   				if(recordDatas_${UUID}[curPage] == undefined){
+   					recordDatas_${UUID}[curPage] = {};
+   				}
+   				 var cbHead = $("#${id}_wrapper #DATATABLESALLSELECT_${UUID}");
+	        	for(var it=0;  it< data.length; it++){
+	        		var obj = data[it];
+	        		if(obj['CHECKED']){
+	        			recordDatas_${UUID}[curPage][it] = obj;
+	        		}
+	        	}
+
+    	        {@if multiPageSelect}
+    	        	{# 多页选择时, 初始化当前页}
+    	        	$.each($checkbox,function(i,obj){
+    	        		$(obj).removeAttr("checked");
+		   				$.each(recordDatas_${UUID}[curPage],function(j,item){
+		   					if(item.${primaryKey} == data[displayStart + i].${primaryKey}){
+		   						$(obj).attr("checked","checked");
+		   					}
+		   				});
+		   			 });
+		   		{@else}
+		   			{# 没有多页选择时, 数组置空}
+		   			recordDatas_${UUID} = {};
+    	        	$.each($checkbox,function(i,obj){
+		   				$(obj).removeAttr("checked");
+		   			});
+		   		{@/if}
+		   		
+
+		   		{# 加入默认勾选数据index }
+		   		{@if needCheckBox}
+		   			var oTable = $('#${id}').dataTable();
+    	        	var settings = oTable.fnSettings();
+    	        	var curPage = settings._iDisplayStart/settings._iDisplayLength;
+    	        	var cbSingles = $("#${id} input[name^='DATATABLESSINGLESELECT_']");
+					if(JrzlTools.getMapLength(recordDatas_${UUID}[curPage]) != 0 && 
+						cbSingles.length == JrzlTools.getMapLength(recordDatas_${UUID}[curPage])){
+			    			$(cbHead[0]).attr("checked","checked");
+			    	}else{
+			    		$(cbHead[0]).removeAttr("checked");
+			    	}
+			    {@/if}
+
+			    {# 合计}
+			    {@if pageTotal && total}
+			    	var $lastCell = $(table.cell(len - 1, ${totalTextCol}-1).node()),
+			    		$lastSecondCell = $(table.cell(len - 2, ${totalTextCol}-1).node());
+			    	for(var i = 0; i < ${totalTextCol} - 1; i++){
+			    		$(table.cell(len - 1, i).node()).remove();
+			    		$(table.cell(len - 2, i).node()).remove();
+			    	}
+			    	$lastCell.attr("colSpan",${totalTextCol});
+			    	$lastCell.html(totalText_${UUID});
+			    	$lastSecondCell.attr("colSpan", ${totalTextCol});
+			    	$lastSecondCell.html(pageTotalText_${UUID});
+			    	$(table.row(len - 1).node()).unbind('click');
+			    	$(table.row(len - 2).node()).unbind('click');
+			    {@else if pageTotal || total}
+			    	var $lastCell = $(table.cell(len - 1, ${totalTextCol}-1).node());
+			    	for(var i = 0; i < ${totalTextCol} - 1; i++){
+			    		$(table.cell(len - 1, i).node()).remove();
+			    	}
+			    	$lastCell.attr("colSpan",${totalTextCol});
+			    	$lastCell.html(${pageTotal} ? pageTotalText_${UUID}:totalText_${UUID});
+			    	$(table.row(len - 1).node()).unbind('click');
+			    {@/if}
+
+	   			{# 每次画table执行回调 }
+                {@if drawCallback != null}
+                	${drawCallback}();
+                {@/if}
+          },
+          "bDestroy":true,
+	      "language":{
+		            	    "emptyTable":     "列表中没有可获取的数据",
+		            	    "info":           "共 _TOTAL_ 条&nbsp;&nbsp;&nbsp;每页 _LENGTH_ 条&nbsp;&nbsp;&nbsp;共 _PAGES_ 页",
+		            	    "infoEmpty":      "显示 0 到 0 条，共 0 条",
+		            	    "infoFiltered":   "(从总 _MAX_ 条中过滤)",
+		            	    "infoPostFix":    "",
+		            	    "thousands":      ",",
+		            	    "lengthMenu":     "选择页条目数 _MENU_ ",
+		            	    "loadingRecords": "加载数据中...",
+		            	    "processing":     "正在加载...",
+		            	    "search":         "搜索:",
+		            	    "zeroRecords":    "没有查到匹配的数据",
+		            	    "paginate": {
+		            	        "first":      "首页",
+		            	        "last":       "末页",
+		            	        "next":       "后页",
+		            	        "previous":   "前页"
+		            	    }
+		 },
+		 "initComplete":function(settings, json){
+			 {# 加载完数据回调函数 }
+			 {@if afterLoaded != null}
+        	 	${afterLoaded}();
+		 	 {@/if}
+		 }
+	} );
+	$('#${id}').dataTable().on("xhr.dt",function (e,settings, json) {
+		{@if pageTotal || total}
+			if(json['${pageTotalTextKey}'] != null) {
+				pageTotalText_${UUID} = json['${pageTotalTextKey}'];
+			}
+			if(json['${totalTextKey}'] != null) {
+				totalText_${UUID} = json['${totalTextKey}'];
+			}
+		{@/if}
+		{@if preDataCallback != null}
+			${preDataCallback}(settings,json);
+		{@/if}
+	});
+});
+
+
+
+function dataTables_SingleSelect_${UUID}(cbSingle){
+	var table = $('#${id}').DataTable();
+	var data = table.data();
+	var dataLen = data.length;
+
+	var oTable = $('#${id}').dataTable();
+	var settings = oTable.fnSettings();
+	var curPage = settings._iDisplayStart/settings._iDisplayLength;
+	{# index使用本地数据和action时，获取的值是不一样的，但都是对应到data中的位置}
+	var index = oTable.fnGetPosition( cbSingle.parentNode.parentNode.parentNode );
+	if(JrzlTools.getMapLength(recordDatas_${UUID}) == 0 ||recordDatas_${UUID}[curPage] == undefined ){
+		recordDatas_${UUID}[curPage] = {};
+	}
+	var cbHead = $("#${id}_wrapper #DATATABLESALLSELECT_${UUID}");
+	if(undefined == $(cbSingle).attr("checked")){
+		{# 取消时，现将头取消}
+		$(cbHead[0]).removeAttr("checked");
+		var temp ={};
+		{# 取消时，然后更新recordDatas}
+		$.each(recordDatas_${UUID}[curPage],function(j,item){
+			if(j != index+ ""){
+				temp[j] = item;
+			}	
+		});
+		recordDatas_${UUID}[curPage] = temp;
+	}else{
+		{# 选择时，将选择的值加入到recordDatas}
+		recordDatas_${UUID}[curPage][index + ""] = data[index];
+		var cbSingles = $("#${id} input[name^='DATATABLESSINGLESELECT_']");
+		if(cbSingles.length == JrzlTools.getMapLength(recordDatas_${UUID}[curPage])){
+			if(JrzlTools.getMapLength(recordDatas_${UUID}[curPage]) != 0){
+    			$(cbHead[0]).attr("checked","checked");
+    		}
+    	}
+	}
+	{@if clickCallback != null}
+		data[index].index = index+1;
+		${clickCallback}(data[index],cbSingle);
+	{@/if}
+}
+
+function dataTables_AllSelect_${UUID}(){
+    var table = $('#${id}').DataTable();
+    var data = table.data();
+    var dataLen = data.length;
+    
+	var oTable = $('#${id}').dataTable();
+	var settings = oTable.fnSettings();
+	var curPage = settings._iDisplayStart/settings._iDisplayLength;
+	var displayStart = 0;
+	if(${haveUrl} == false){
+			displayStart = settings._iDisplayStart;
+			settings._iRecordsTotal =data.length ;
+	}
+	if(JrzlTools.getMapLength(recordDatas_${UUID}) == 0 ||recordDatas_${UUID}[curPage] == undefined ){
+		recordDatas_${UUID}[curPage] = {};
+	}
+	var cbHead = $("#${id}_wrapper #DATATABLESALLSELECT_${UUID}");
+	var cbSingles = $("#${id} input[name^='DATATABLESSINGLESELECT_']");
+	var i=0, len=cbSingles.length, allSelectReturn = true;
+
+	{@if allSelectCallback != null}
+		allSelectReturn = ${allSelectCallback}($(cbHead[0]).attr("checked"));
+	{@/if}
+
+	if(!allSelectReturn){
+		if(undefined != $(cbSingles[i]).attr("checked")){
+			$(cbHead[0]).removeAttr("checked");
+		}else{
+			$(cbHead[0]).attr("checked","checked");
+		}
+		return;
+	}
+	if(undefined != $(cbHead[0]).attr("checked")){
+		{# 全选，将所有的数据加入到 recordDatas中}
+		 var temp ={};
+		 for(;i < len;i++){
+			$(cbSingles[i]).attr("checked","checked");
+			temp[i + ""] = data[displayStart + i];
+		 }
+		 recordDatas_${UUID}[curPage] = temp;
+	} else {
+		{# 全部取消 }
+		for(;i < len;i++){
+			 $(cbSingles[i]).removeAttr("checked");
+		}
+		recordDatas_${UUID}[curPage]={};
+	}
+}
+
+var ${id}  = {
+					{# 获得多页选择列的key值数组}
+					getMultiPageSelectKey : function(){
+						{@if multiPageSelect}
+							var selectKeys=[];
+							$.each(recordDatas_${UUID},function(i,obj){
+								$.each(obj,function(j,item){
+									selectKeys.push(item.${primaryKey});
+								});	
+							});
+							 return selectKeys;
+						{@else}
+							JrzlTools.alert("多页选择请将multiPageSelect设为true","提示");
+						{@/if}
+					},
+					{# 清空选中checkbox}
+					clearAllSelection:function(){
+						var cbHead = $("#${id}_wrapper DATATABLESALLSELECT_${UUID}");
+						var cbSingles = $("#${id} input[name^='DATATABLESSINGLESELECT_']");
+						var i=0, len=cbSingles.length;
+						$(cbHead[0]).removeAttr("checked");
+				    	for(;i < len;i++){
+							 $(cbSingles[i]).removeAttr("checked");
+						}
+				    	recordDatas_${UUID} = {};
+					},
+		    		{# 获得所有数据}
+		    		getAllData : function(){
+			    	    var table = $('#${id}').DataTable();
+			    	    var data = table.data();
+			    	    var dataLen = data.length;
+
+			    	    var allData = [];
+			    	    for(var i=0;i<dataLen;i++){
+			    	    	allData.push(data[i]);
+			    	    }
+			    		return allData;
+        	        },
+		    		{# 获得checkbox选中的数据}
+		    		getMultiSelection : function(){
+			    	    var selectDatas=[];
+						$.each(recordDatas_${UUID},function(i,obj){
+							$.each(obj,function(j,item){
+								selectDatas.push(item);
+							});	
+						});
+			    	    return selectDatas;
+    	            },
+    	            {# 获得单击选中的行}
+    	            getSelection : function(){
+			    		var oTable = $('#${id}').dataTable();
+			    		var aData = oTable.fnGetData(oTable.$('tr.selected'));
+
+			    		var index = oTable.$('tr.selected').index();
+
+			    		if(aData == null){
+			    		   JrzlTools.alert("请选中一条数据后再执行操作。","提示");
+			    		   return null;
+			    		}else{
+			    			aData.index = index;
+			    			return aData;
+			    		}
+        	        },
+        	        {# 获得排序信息}
+        	        getSortInfo : function(){
+        	        	var oTable = $('#${id}').dataTable();
+        	        	var settings = oTable.fnSettings();
+        	        	var start = settings._iDisplayStart;
+        	        	var limit = settings._iDisplayLength;
+        	        	var sorts = _fnSortFlatten_${UUID}( settings );
+                      	var
+							columns = settings.aoColumns,
+							columnCount = columns.length;
+
+						var pageSize = limit;
+						var curPage	 = start/limit+1;
+
+						if(sorts == null || sorts.length == 0){
+						  return {pageSize:pageSize,curPage:curPage};
+						}
+						var sort = sorts[0];
+
+						var sortIndex = sort.col;
+						var sortDir = sort .dir;
+
+						var sortCol = columns[sortIndex].data;
+						var obj  = {sortCol:sortCol,sortDir:sortDir,pageSize:pageSize,curPage:curPage};
+						return obj;
+        	        },
+        	        /**
+        	         * 获取表格对应元素，返回对应元素的jQuery对象
+        	         * row 表示行号
+        	         * col 表示列号，col不传则返回一行的jQuery对象
+        	         *
+        	         */
+    	            getTableCell : function(row, col){
+    	            	var oTable = $('#${id}').dataTable();
+    	            	if(typeof row == "undefined" || isNaN(row)){
+    	            		return null;
+    	            	}
+    	            	var oRow = oTable.find("tr:eq("+ row +")");
+    	            	if(col != null && !isNaN(col)){
+    	            		var oTd = oRow.find("td:eq("+ (col - 1) +")");
+    	            		return oTd;
+    	            	}
+    	            	return oRow;
+    	            },
+    	            {# 返回选择行的序号(数组) }
+    	            getSelectedIndexs : function(){
+    	            	var oTable = $('#${id}').dataTable();
+						var settings = oTable.fnSettings();
+						var curPage = settings._iDisplayStart/settings._iDisplayLength;
+    	            	var selectIndexs=[];
+						$.each(recordDatas_${UUID}[curPage],function(j,item){
+							selectIndexs.push(j);
+						});	
+					
+			    	    return selectIndexs;
+    	     
+    	            },
+    	            {# 查询}
+    	            onquery : function(params,resetPaging){
+    	                var reset = resetPaging;
+    	                if(reset==null){
+	    	            	reset = true;
+	    	            }
+
+    	                {@if isAjaxRequest==false}
+    	                    return;
+    	                {@else}
+    	                    if(${validated}==true){         {# 需要校验，执行字段校验}
+								 if(typeof $.doValidate!=="function"){
+								     JrzlTools.alert("没有引进校验所需的js","提示");
+								     return;
+								 }else if(!($.doValidate('${action}'))){
+									 return;                      {# 校验不通过，返回}
+								 }
+			    			};
+	    	            	var table = $('#${id}').DataTable();
+	    	            	var otable = $('#${id}').dataTable();
+
+	    	            	var settings = otable.fnSettings();
+
+	    	            	settings.aoServerParams = [];
+	    	            	settings.aoServerParams.push({
+	    	            		"fn": function (aoData) {
+	    	            		   if(params!=null){
+										for(var key in params){
+											var param = {"name":key,"value":params[key]};
+											aoData.push(param);
+							            }
+				                   }
+	    	            		   aoData.push({"name":"_EXTREQUEST_FROMAJAX","value":"${pagingInfo}" });
+
+	    	            		 }
+	    	            	});
+
+	    	            	table.ajax.reload(
+	    	            			null,reset
+	    	            	);
+
+	    	            	var cbHead = $("#${id} #DATATABLESALLSELECT_${UUID}");
+			    	    	 if(null!=cbHead[0]){
+			    	    	        $(cbHead[0]).removeAttr("checked");
+			    	    	        dataTables_AllSelect_${UUID}();
+			    	    	        recordDatas_${UUID} = {};
+			    	    	 }
+    	            	{@/if}
+
+
+    	            }
+
+};
+
+function _fnSortFlatten_${UUID} ( settings )
+	{
+		var
+			i, iLen, k, kLen,
+			aSort = [],
+			aiOrig = [],
+			aoColumns = settings.aoColumns,
+			aDataSort, iCol, sType, srcCol,
+			fixed = settings.aaSortingFixed,
+			fixedObj = $.isPlainObject( fixed ),
+			nestedSort = [],
+			add = function ( a ) {
+				if ( a.length && ! $.isArray( a[0] ) ) {
+
+					nestedSort.push( a );
+				}
+				else {
+
+					nestedSort.push.apply( nestedSort, a );
+				}
+			};
+
+		if ( $.isArray( fixed ) ) {
+			add( fixed );
+		}
+
+		if ( fixedObj && fixed.pre ) {
+			add( fixed.pre );
+		}
+
+		add( settings.aaSorting );
+
+		if (fixedObj && fixed.post ) {
+			add( fixed.post );
+		}
+
+		for ( i=0 ; i<nestedSort.length ; i++ )
+		{
+			srcCol = nestedSort[i][0];
+			aDataSort = aoColumns[ srcCol ].aDataSort;
+
+			for ( k=0, kLen=aDataSort.length ; k<kLen ; k++ )
+			{
+				iCol = aDataSort[k];
+				sType = aoColumns[ iCol ].sType || 'string';
+
+				aSort.push( {
+					src:       srcCol,
+					col:       iCol,
+					dir:       nestedSort[i][1],
+					index:     nestedSort[i][2]
+				} );
+			}
+		}
+
+		return aSort;
+	}
+
+
+</script>

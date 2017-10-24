@@ -1,0 +1,142 @@
+<script>
+var ${id}_Completed = true;
+
+$(function() {
+	$("#${id}").plupload({         
+		{# General settings}         
+		runtimes : 'html5,flash,silverlight,html4',         
+		url : "${url}",  
+		max_retries: 3,
+		{# Maximum file size}         
+		/*max_file_size : '${max_file_size}mb', */
+		chunk_size: 0,
+		file_data_name:"file1",
+		{# Specify what files to browse for}   
+		filters : [         
+		           {title : '${fileTypesTips}', 
+			   			 extensions : '${fileTypes}'}
+		],          
+		{# Rename files by clicking on their titles}        
+		rename: false,                   
+		{# Sort files}        
+		sortable: false,           
+		{# Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)}         
+		dragdrop: false,
+		autostart:true,          
+		{# Views to activate}
+	    buttons:{
+			start:false,
+			stop:false
+		},       
+		views: {             
+			list: true,             
+			thumbs: false, 
+		    {# Show thumbs}            
+			active: 'thumbs'        
+		},          
+		{# Flash settings}        
+		flash_swf_url : '${flash_url}',              
+		{# Silverlight settings}        
+	    silverlight_xap_url : '${silverlight_url}',
+	    {# reLoginUrl settings} 
+	    reLoginUrl:'${reLoginUrl}'
+	  /*  max_file_number:${max_file_number}*/
+	}); 
+	var uploader_${UUID} = $('#${id}').plupload('getUploader');
+	
+	uploader_${UUID}.bind("FilesRemoved", function(up, files) {
+	  　	var str = "";
+	    for(var i=0,len=up.files.length;i<len;i++){
+            if(up.files[i].FILEID!=null && up.files[i].FILEID.length>0){
+    	       str = str+"@"+up.files[i].FILEID;
+            }
+	    }
+	    if(str.length>0){
+    	    str = str.substr(1);   
+	    }
+	    $('#${id}').attr("file",str);
+	}); 
+	
+	uploader_${UUID}.bind("FileUploaded", function(up, file, obj) {
+	    var jsonObj = $.parseJSON( obj.response );
+	    file.FILEID = jsonObj.FILEID ;
+	    var str = "";
+        for(var i=0,len=up.files.length;i<len;i++){
+        	if(up.files[i].FILEID!=null && up.files[i].FILEID.length>0){
+ 	    	    str = str+"@"+up.files[i].FILEID;
+            }
+        }
+        if(str.length>0){
+        	str = str.substr(1);   
+        }
+        $('#${id}').attr("file",str);
+	      
+	});
+
+	uploader_${UUID}.bind("FileFiltered", function(up, file){
+		var total = up.files.length; 
+		{# 判断文件数是否超过限制 }
+		if(total > ${max_file_number}){
+			for(var i = ${max_file_number}; i < total; i++){
+				$('#${id}').plupload('removeFile',up.files[${max_file_number}]);
+			}
+			JrzlTools.alert("不能超过" + ${max_file_number} + "个文件!", "提示", null);
+			return;
+		}
+		
+		var errorMsg = ""; 
+		var errorType = {TypErr:false,NameLen:false,FileSize:false};
+		{# 判断文件类型,文件名长度,文件大小}
+		for(var i = 0; i < total; i++){
+			if(i >= up.files.length){
+				break;
+			}
+			else if(up.files[i].type == "application/x-javascript" || up.files[i].type == "application/octet-stream"){
+				$('#${id}').plupload('removeFile', up.files[i--]);
+				errorType.TypErr = true; 
+			}
+			else if(i >= 0 && JrzlTools.getRealLength(up.files[i].name) > 120){
+				$('#${id}').plupload('removeFile', up.files[i--]);
+				errorType.NameLen = true;
+			}
+			else if(i >= 0 && up.files[i].size > ${max_file_size}*1024*1024){
+				$('#${id}').plupload('removeFile', up.files[i--]);
+				errorType.FileSize = true;
+			}
+		}		
+		if(errorType.TypErr){
+			errorMsg += "文件类型有误。";
+		}
+		if(errorType.NameLen){
+			errorMsg += "文件名不能超过120个字符。";
+		}
+		if(errorType.FileSize){
+			errorMsg += "文件大小不能超过" + ${max_file_size} + "M。"
+		}	
+		if(errorMsg != ""){
+			JrzlTools.alert(errorMsg, "提示", null);
+		}
+	});
+	
+	$('#${id}').on('complete', function() {
+	   ${id}_Completed  = true;
+    });
+
+	$('#${id}').on('progress', function() {
+		${id}_Completed = false;
+	});
+});
+
+
+var ${id}  = {
+     distroy:function(){
+         $('#${id}').plupload('destroy');
+         $('#${id}').attr("file","");
+     },
+     refresh:function(){
+    	 $('#${id}').plupload('refresh');
+     }
+};
+
+</script>
+

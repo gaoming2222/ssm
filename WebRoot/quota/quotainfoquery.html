@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>额度详情</title>
+<script type="text/javascript" src="common/plugins/jsloader/codebase/jsloader.js" main="quotainfoquery.js"></script>
+</head>
+<body>
+	<form name="submitform" id="submitform" method="post">
+		<div class="outer-area">
+            <div class="inner-data-area">
+				<table class="detailTable">
+					<tr class="first">
+						<td class="head"><font>*</font>额度编号</td>
+						<td class="content">
+							<input type="text" id="QUOTA_ID" name="QUOTA_ID" value="ED80234497" readonly="readonly" />
+
+						</td>
+						<td class="head"><font>*</font>币种</td>
+						<td class="content">
+							<select id="CURRENCY" name="CURRENCY" onchange="" readonly="readonly">
+							<option>CNY</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="first">
+						<td class="head"><font>*</font>总额度</td>
+						<td class="content">
+							 <input type="text" id="TOT_CST" name="TOT_CST" value="1000000" readonly="readonly"/>
+						</td>
+						<td class="head"><font>*</font>循环使用</td>
+						<td class="content">
+							<select id="CYCLE_USE" name="CYCLE_USE" onchange="" readonly="readonly">
+							<option>是</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="head">
+						<td class="head"><font>*</font>同业客户</td>
+						<td class="content">
+							<select id="CORR_CUSTOMER" name="CORR_CUSTOMER" onchange="" readonly="readonly">
+							<option>是</option>
+							</select>
+						</td>
+						<td class="head"><font>*</font>集团客户</td>
+						<td class="content">
+							<select id="GRP_CUSTOMER" name="GRP_CUSTOMER" onchange="" readonly="readonly">
+							<option>是</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="head">
+						<td class="head"><font>*</font>核心系统客户号</td>
+						<td class="content">
+	                        <input type="text" id="CORE_SYS_CLIENT_ID" name="CORE_SYS_CLIENT_ID" value="000001" readonly="readonly"/>
+						</td>
+						<td class="head"><font>*</font>核心系统客户名称</td>
+						<td class="content clearRight">
+							<input type="text" id="CORE_SYS_CLIENT_NAM" name="CORE_SYS_CLIENT_NAM" value="明大哥"  readonly="readonly"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="head"><font>*</font>起始日</td>
+						<td class="content">
+							 <input type="text" id="VAL_DTE" name="VAL_DTE" value = "20170622" readonly="readonly"/>
+							 <span id="VAL_DTE_WEEKDAY" style="color: Blue"></span>
+						</td>
+						<td class="head"><font>*</font>到期日</td>
+						<td class="content clearRight">
+							 <input type="text" id="DUE_DTE" name="DUE_DTE" value = "20170822" readonly="readonly"/>
+							 <span id="DUE_DTE_WEEKDAY" style="color: Blue"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="head"><font>*</font>公募额度上限</td>
+						<td class="content">
+							 <input type="text" id="PUB_QUO_TOP" name="PUB_QUO_TOP" value = "1000000" onblur="" onfocus="" readonly="readonly"/>
+						</td>
+						<td class="head"><font>*</font>私募额度上限</td>
+						<td class="content clearRight">
+							 <input type="text" id="PRI_QUO_TOP" value = "2000000 "name="PUB_QUO_TOP" onblur="" onfocus=""  readonly="readonly"/>
+						</td>
+					</tr>
+					<tr>
+
+					</tr>
+                    <tr class="head">
+                    	<td colspan="4" class="titleBar">
+                    		<font style="color: red">*</font>规则信息
+                        </td>
+                    </tr>
+                    <tr>
+						<td colspan="4" class="content" >
+							<table id="gridRuleInfo"></table>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</form>
+
+	</body>
+	</html>

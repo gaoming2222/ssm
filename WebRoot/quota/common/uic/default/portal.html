@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="../../plugins/jsTree-3.0.8/themes/default/style.css" />
+<link rel="stylesheet" href="css/portal.css" />
+<title>资产管理门户系统</title>
+</head>
+<body>
+    <div class="loading-progress-bg" ><div class="loading-progress-container"><div class="loading-progress-img" ></div><div class="loading-progress-txt">首页跳转中，请稍候...</div></div></div>
+    <div id="layout">
+        <div id="header">
+          <img src="images/blank.gif"  class="logo-img"/>
+          <span class="logo-title" id="headtitle">资产管理门户</span>
+        </div>
+         <div id="toolsbar" >
+            <div class="tools-content">
+               <div class="logo-up-down-area fl">
+                  <a class="logo-up" title="收起/显示logo" onclick="logoToggle(this)"></a>
+                  <a class="left-bar-hide" title="收起/显示菜单栏" onclick="leftBarToggle(this)"></a>
+                  <a class="help-img" id="PUB_DOC_DOCMANAGE" title="帮助文档管理"  onclick="specialAccessButtonClick(this)"></a>
+	              <a class="chrome-icon" id="DOWNLOADCHROME" title="下载chrome" onclick="downloadChrome(this)"></a>
+	           </div>
+	           <div class="shortcut-area fl">
+	           	  <div class="cut-line-span" ></div>
+	              <div class="shortcut-text-span" ></div>
+	         	  <!-- 增加时间显示 -->
+	         	  <div id="sysTime" class="user-welcome-span"></div>
+	           </div>
+	           <div class="fr">
+	           <a class="home-img" title="首页" onclick="home_onclick()"></a>
+	              <span class="user-welcome-span" id="USERWELCOME"></span>
+	             <a class="logout-img" title="退出" onclick="logout_onclick()"></a>
+	           </div>
+	        </div>
+        </div>
+
+        <div id="container">
+             <!-- 左边操作区bar -------start -->
+            <div id="sidebar">
+              <div id="sidecontrol">
+                       <div id="sysmenu" >
+	            	    <!-- 固顶及风格切换区 -------start -->
+		            	<div id="sysmenutopbar" >
+		            	 </div>
+		            	 <!-- 子系统菜单区 -->
+		            	 <div id="sys-menu">
+
+                     </div>
+	               </div>
+            </div>
+            </div>
+            <!-- 左边操作区bar -------end -->
+            <div id="content" ></div>
+        </div>
+
+       </div>
+	    <!-- 关闭\关闭其他\关闭所有Tab -->
+		<div class="contextMenu" id="removeTab">
+	   		<ul>
+	   			<li id="remove">关闭</li>
+	        	<li id="removeOtherTabs">关闭其他</li>
+	        	<li id="removeAllTabs">关闭所有</li>
+	      	</ul>
+	    </div>
+		<div id="downloadChromeDiv" class="outer-area" style="display: none;">
+	        <div class="inner-data-area" style="border: none;">
+	            <div class="bottom-button-area">
+	                <input type="button" class="common-button" id="downloadChromeButton" name="downloadChromeButton" onclick="downloadChromeButtonClick()" value="下载chrome" />
+	            </div>
+	        </div>
+	    </div>
+
+</body>
+<script src="../../plugins/jsloader/codebase/jsloader.js"  main="portal.js" ></script>
+</html>

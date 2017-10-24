@@ -1,0 +1,95 @@
+.tree-items-pick {
+	border: solid 0px c2c9cf;
+	height: 100%;
+	padding: 0px !important;
+	background-color: #ECF0F3;
+}
+
+.tree-items-pick  .tree-area {
+	border: 1px solid #d0d0d0;
+	height: 180px;
+	width: 565px;
+	margin-left: 15px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.tree-items-pick  .tree-items-pick-input {
+	background-color: #fff !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	width: 120px !important;
+	padding: 4px !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	vertical-align: middle;
+}
+
+.tree-items-pick  .tree-items-pick-query-btn {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	margin-left: 6px;
+	width: 50px !important;
+	height: 26px !important;
+	background: url(images/ButtonShort.png) no-repeat !important;
+	cursor: pointer !important;
+	vertical-align: middle;
+}
+
+.tree-items-pick  .tree-items-pick-query-btn:hover {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	margin-left: 6px;
+	width: 50px !important;
+	height: 26px !important;
+	background: url(images/ButtonShortHover.png) no-repeat !important;
+	cursor: pointer !important;
+	vertical-align: middle;
+}
+
+.tree-items-pick  .tree-items-pick-btn {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(images/ButtonNormal.png) no-repeat !important;
+	cursor: pointer !important;
+}
+
+.tree-items-pick  .tree-items-pick-btn:hover {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(images/ButtonNormalHover.png) no-repeat !important;
+	cursor: pointer !important;
+}
+
+.tree-items-pick  .tree-items-pick-query-result-li {
+	width: 210px;
+	line-height: 25px;
+	border-bottom: 1px dashed gray;
+}
+
+.tree-items-pick  .tree-items-pick-query-result-li:hover {
+	background-color: #e7eaef;
+}
+
+.tree-items-pick  .tree-items-pick-item-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/user.gif) no-repeat;
+	margin: 4px 10px 5px 10px;
+	float: left;
+}
+
+.tree-items-pick  .tree-items-pick-select-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/select.gif) no-repeat;
+	margin: -20px 3px 5px 180px;
+	float: left;
+}

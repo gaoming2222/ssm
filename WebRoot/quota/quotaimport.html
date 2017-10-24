@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>额度导入管理</title>
+	</head>
+<body>
+    <form name="submitform" id="submitform" method="post">
+        <div class="outer-area">
+            <div class="title">
+                <span class="icon-title"></span>
+                <label class="text-title">
+                	额度导入管理
+                </label>
+            </div>
+            <div class="inner-search-area">
+                <div class="search-condition">
+                    <table id="datatable">
+                        <tr>
+                             <td class="required"></td>
+                            <td class="head">客户编号：</td>
+                            <td class="content">
+                                <input type="text" id="CLIENT_ID" name="CLIENT_ID" />
+                            </td>
+                            <td class="required"></td>
+                            <td class="head">客户名称：</td>
+                            <td class="content">
+                                <input type="text" id="CLIENT_NAM" name="CLIENT_NAM" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="required"></td>
+                            <td class="head">债券类别：</td>
+                            <td class="content">
+                               <select id = "quota_type" name="quota_type"></select>
+                            </td>
+                            <td class="required"></td>
+                            <td class="head">到期日：</td>
+                            <td class="content">
+                                <input type="text" id="DUE_DTE_STRT" name="DUE_DTE_STRT" class="range-date"/>
+                                到
+                                <input type="text" id="DUE_DTE_END" name="DUE_DTE_END" class="range-date"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="search-button">
+                        <input type="button" id="QUERY" name="QUERY" onclick="query_onclick()" value="查询" />
+                    </div>
+
+            </div>
+            </div>
+
+            <div class="inner-button-area">
+                <div class="function-button">
+                <input type="button" id="DOWNLOAD" name="DOWNLOAD" onclick="download_onclick()" value="模板下载"/>
+                <input type="button" id="IMPORT" name="IMPORT" onclick="import_onclick()" value="导入"/>
+                </div>
+            </div>
+            <div class="inner-list-area">
+                <table id="prvGrid"></table>
+            </div>
+
+        </div>
+    </form>
+	    <!-- 进度条窗口 -->
+	  <div id="batch_Operator" style="display: none;">
+	  <div id="processbar" style="display: none;margin: 66px 20px 0px 20px;"></div>
+	  <div style="margin: 5px 20px 0px 20px;">
+	   <textarea id="errText" rows="6" style="resize:none;overflow:auto;width:100%; border-width:0px;background-color: #f3f4f6" readonly></textarea>
+	  </div>
+	  <div class="bottom-button-area" id="button_operate_div" style="margin-top:0px;display:none">
+	           <input type="button" id="" name="" onclick="close_operate()" value="关闭" />
+	  </div>
+	  </div>
+	  <!-- 附件上传界面 start -->
+	<div id="showUploadAtch" style="display: none; padding: 10px; overflow: hidden;">
+		<div id="uploader_ATCH" class="upload-area" file=""></div>
+		<div class="button-area">
+			<input type="button" class='common-button' style="margin-right: 10px;" onclick="uploadAtch()" value="确定" />
+			<input type="button" class='common-button' onclick="closeAtch_onclick()" value="取消 " />
+		</div>
+	</div>
+	<!-- 附件上传界面 end -->
+	</body>
+	<script type="text/javascript" src="common/plugins/jsloader/codebase/jsloader.js" main="quotaimport.js"></script>
+</html>

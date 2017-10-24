@@ -1,0 +1,165 @@
+div.jrzlSelectTree {
+	display: none;
+	padding: 5px 0 0 8px;
+}
+
+.jrzlSelectTree .leftTreeArea {
+	display: block;
+	background-color: white;
+	width: 230px;
+	height: 220px;
+	border: 1px solid #d0d0d0;
+	overflow-y: auto;
+}
+
+.jrzlSelectTree .rightTreeArea {
+	display: block;
+	background-color: white;
+	width: 230px;
+	height: 220px;
+	border: 1px solid #d0d0d0;
+	overflow-y: auto;
+}
+
+.jrzlSelectTree .tip-area {
+	margin: 5px 11px 10px 4px;
+	background-color: #F5F3E7;
+	border: 1px solid #B8BFB5;
+	padding: 8px 10px;
+}
+
+.jrzlSelectTree .tip-area span.tip-span {
+	display: block;
+	font-size: 12px !important;
+	line-height: 20px;
+}
+.jrzlSelectTree input[type="button"] {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	cursor: pointer !important;
+}
+
+.jrzlSelectTree div input[type="button"] {
+	text-align: right;
+	padding-right: 18px;
+}
+
+.jrzlSelectTree input.button-left {
+	background: url(../../uic/default/images/SelectTree-Left.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-left:hover {
+	background: url(../../uic/default/images/SelectTree-LeftHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-left:focus {
+	background: url(../../uic/default/images/SelectTree-LeftClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-remove {
+	background: url(../../uic/default/images/SelectTree-Remove.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-remove:hover {
+	background: url(../../uic/default/images/SelectTree-RemoveHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-remove:focus {
+	background: url(../../uic/default/images/SelectTree-RemoveClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-clear {
+	background: url(../../uic/default/images/SelectTree-Clear.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-clear:hover {
+	background: url(../../uic/default/images/SelectTree-ClearHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-clear:focus {
+	background: url(../../uic/default/images/SelectTree-ClearClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-top {
+	background: url(../../uic/default/images/SelectTree-Top.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-top:hover {
+	background: url(../../uic/default/images/SelectTree-TopHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-top:focus {
+	background: url(../../uic/default/images/SelectTree-TopClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-up {
+	background: url(../../uic/default/images/SelectTree-Up.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-up:hover {
+	background: url(../../uic/default/images/SelectTree-UpHover.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-up:focus {
+	background: url(../../uic/default/images/SelectTree-UpClick.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-down {
+	background: url(../../uic/default/images/SelectTree-Down.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-down:hover {
+	background: url(../../uic/default/images/SelectTree-DownHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-down:focus {
+	background: url(../../uic/default/images/SelectTree-DownClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-bottom {
+	background: url(../../uic/default/images/SelectTree-Bottom.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-bottom:hover {
+	background: url(../../uic/default/images/SelectTree-BottomHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-bottom:focus {
+	background: url(../../uic/default/images/SelectTree-BottomClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree .common-button,
+#reNameFolderDiv .common-button,
+#addFolderDiv .common-button {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(../../uic/default/images/ButtonNormal.png) no-repeat !important;
+	cursor: pointer !important;
+}
+
+.jrzlSelectTree .common-button:hover,
+#reNameFolderDiv .common-button:hover,
+#addFolderDiv .common-button:hover {
+	background: url(../../uic/default/images/ButtonNormalHover.png) no-repeat !important;
+}
+.jrzlSelectTree .common-button:focus,
+#reNameFolderDiv .common-button:focus,
+#addFolderDiv .common-button:focus {
+	background: url(../../uic/default/images/ButtonNormalClick.png) no-repeat !important;
+}

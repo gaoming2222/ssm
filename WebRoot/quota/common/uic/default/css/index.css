@@ -1,0 +1,889 @@
+@CHARSET "utf-8";
+html{
+	height: 100% !important;
+}
+
+/*棣栭〉甯冨眬鏍峰紡-----start */
+html,body {
+	font-size: 12px;
+	color: #283442;
+	text-decoration: none;
+	font-family: "宋体" !important;
+	margin: 0; /* 鏈?濂藉皢 body 鍏冪礌鐨勮竟璺濆拰濉厖璁剧疆涓? 0 浠ヨ鐩栦笉鍚岀殑娴忚鍣ㄩ粯璁ゅ?? */
+	padding: 0;
+	height: 100%;/*杩欓噷灏嗛珮搴﹁缃负100%鏄繖涓竷灞?瀹炵幇鑷?傚簲楂樺害鐨勫叧閿紝鍙湁杩欓噷璁剧疆浜嗛珮搴︼紝涓嬮潰div鐨勯珮
+
+搴﹁缃墠璧蜂綔鐢?*/
+	background-color: #fff;
+	overflow-y: hidden;
+}
+a{
+	cursor: pointer !important;
+}
+
+#layout {
+	width: 100%;
+	height: 100%;
+	margin: 0px auto;
+}
+
+#header {
+	height: 50px;
+	background: url(../images/LogoRightBg.png) repeat-x;
+}
+
+#toolsbar {
+	height: 33px;
+	background: url(../images/HeadBarBg.png) repeat-x;
+}
+
+#container {
+	background-color: #e2e5e9;
+	border-bottom: 1px solid #AAAAAA;
+}
+
+#container #sidebar {
+	height: 100%;
+	width: 220px;
+	filter: alpha(opacity =                 100);
+	background-color: #e2e5e9;
+	float: left;
+}
+
+#container #content {
+	height: 100%;
+	background-color: #f5f7f9;
+	float: left;
+}
+/*******宸︿晶tree閲岀殑甯冨眬*******/
+#container #sidebar #sidecontrol {
+	height: 100%;
+	background-color: #e2e5e9;
+	border-right: 1px solid #aaaaaa;
+}
+
+#container #sidebar #sidecontrol #sysmenu #sysmenutopbar {
+	width: 100%;
+	height: 39px;
+	background-color: #e2e5e9;
+	background: url(../images/MenuTopBarBg.png) repeat-x;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+#container #sidebar #sidecontrol #sysmenu .old_sys_menu {
+	width: 100%;
+	height: 60px;
+	background-color: #e2e5e9;
+}
+
+#container #sidebar #sidecontrol #searchmenu #searchmenutopbar {
+	width: 100%;
+	height: 39px;
+	background-color: #e2e5e9;
+	background: url(../images/MenuTopBarBg.png) repeat-x;
+	border-bottom: 1px solid #aaaaaa;
+	border-right: 1px solid #aaaaaa;
+}
+
+#container #sidebar #sidecontrol #collectmenu #collectmenutopbar {
+	width: 100%;
+	height: 39px;
+	background-color: #e2e5e9;
+	background: url(../images/MenuTopBarBg.png) repeat-x;
+	border-bottom: 1px solid #aaaaaa;
+	border-right: 1px solid #aaaaaa;
+}
+
+#container #sidebar #sidecontrol #searchmenu {
+	display: none;
+}
+
+#container #sidebar #sidecontrol #collectmenu {
+	display: none;
+}
+
+
+
+.clearfloat {
+	/* 姝ょ被搴斿綋鏀惧湪 div 鎴? break 鍏冪礌涓婏紝鑰屼笖璇ュ厓绱犲簲褰撴槸瀹屽叏鍖呭惈娴姩鐨勫鍣ㄥ叧闂箣鍓嶇殑鏈?鍚庝竴涓厓绱? */
+	clear: both;
+	height: 0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+/*棣栭〉甯冨眬鏍峰紡-----end */
+
+/*鍏敤*/
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+/*婊氬姩鏉℃暣浣? for chrome-------------start*/
+::-webkit-scrollbar {
+	width: 14px; /*婊氬姩鏉″搴?*/
+}
+ /*婊氬姩鏉℃寜閽?*/
+::-webkit-scrollbar-button {
+
+}
+
+::-webkit-scrollbar-track {
+	background-color: #ECF0F3; /*婊戦亾鍏ㄩ儴*/
+}
+
+::-webkit-scrollbar-track-piece {
+	background-color: #ECF0F3; /*婊戦亾*/
+	-webkit-border-radius: 4px; /*婊戦亾鍦嗚瀹藉害*/
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #c2c9cf; /*婊戝姩鏉¤〃闈?*/
+	border: solid 1px #C0C0C0; /*婊戝姩鏉¤竟妗?*/
+	border-radius: 4px; /*婊戝姩鏉″渾瑙掑搴?*/
+}
+ /*妯珫婊氬姩鏉′氦瑙?*/
+::-webkit-scrollbar-corner {
+	background-color: #F3F3F3;
+}
+ /*妯珫婊氬姩鏉′氦瑙掑浘妗?*/
+::-webkit-resizer {
+	/*background-image: url(/public/img/resizer-inactive.png);*/
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+/*榧犳爣婊戣繃婊戝姩鏉?*/
+::-webkit-scrollbar-thumb:hover {
+	background-color: #b3b3b3;
+}
+
+/*婊氬姩鏉℃暣浣? for chrome-----------end*/
+
+div {
+	scrollbar-face-color: #c2c9cf;
+	scrollbar-highlight-color: #e6e6e6;
+	scrollbar-shadow-color: #cbcbcb;
+	scrollbar-3dlight-color: #cccccc;
+	scrollbar-darkshadow-color: #686868;
+	scrollbar-arrow-color: #555555;
+	scrollbar-track-color: #ECF0F3;
+}
+
+.loading-progress-bg {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: #cccfd1;
+	z-index: 100;
+}
+
+.loading-progress-container {
+	margin: auto;
+	position: absolute;
+	width: 237px;
+	height: 37px;
+	top: 40%;
+	left: 45%;
+}
+
+.loading-progress-txt {
+	margin-top: 12px;
+	margin-left: 7px;
+	height: 37px;
+	float: left;
+}
+
+.loading-progress-img {
+	background: url("../images/loading.gif") no-repeat;
+	width: 37px;
+	height: 37px;
+	float: left;
+}
+
+/*************************鏂扮殑**************/
+#toolsbar {
+
+}
+
+.logo-img {
+	height: 50px;
+	width: 1000px;
+	position: absolute;
+	top: 0px;
+	background: url(../images/Logo.png) no-repeat;
+}
+.logo-title{
+	position: absolute;
+	left:80px;
+	top:10px;
+	font-size:23px;
+	color: white;
+	font-family: "黑体";
+	font-weight:bold;
+	font: 23px Microsoft YaHei;
+}
+
+#toolsbar .tools-content {
+	height: 25px;
+	width: 100%;
+	margin-top: 5px;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#toolsbar div a {
+	height: 25px;
+	width: 23px;
+	display: inline-block;
+	margin-left: 10px;
+	float: left;
+}
+
+#toolsbar .logo-up-down-area {
+	width: 209px;
+	padding-left: 10px;
+}
+
+
+
+.logo-up {
+	height: 25px;
+	width: 23px;
+	margin-left: 16px;
+	background: url(../images/LogoUp.png) no-repeat;
+}
+.logo-up:hover {
+	background: url(../images/LogoUpHover.png) no-repeat;
+}
+.logo-up:active {
+	background: url(../images/LogoUpClick.png) no-repeat;
+}
+
+.logo-down {
+	height: 25px;
+	width: 23px;
+	margin-left: 16px;
+	background: url(../images/LogoDown.png) no-repeat;
+}
+.logo-down:hover  {
+	background: url(../images/LogoDownHover.png) no-repeat;
+}
+.logo-down:active {
+	background: url(../images/LogoDownClick.png) no-repeat;
+}
+
+.left-bar-hide {
+	height: 25px;
+	width: 23px;
+	margin-left: 10px;
+	background: url(../images/LeftBarHide.png) no-repeat;
+}
+.left-bar-hide:hover {
+	background: url(../images/LeftBarHideHover.png) no-repeat;
+}
+.left-bar-hide:active {
+	background: url(../images/LeftBarHideClick.png) no-repeat;
+}
+
+.left-bar-show {
+	height: 25px;
+	width: 23px;
+	margin-left: 10px;
+	background: url(../images/LeftBarShow.png) no-repeat;
+}
+.left-bar-show:hover {
+	background: url(../images/LeftBarShowHover.png) no-repeat;
+}
+.left-bar-show:active {
+	background: url(../images/LeftBarShowClick.png) no-repeat;
+}
+
+#toolsbar .shortcut-area {
+
+}
+
+#toolsbar .right-info-area {
+	padding-left: 10px;
+}
+
+.help-img {
+	height: 25px;
+	width: 23px;
+	margin-left: 10px;
+	background: url(../images/Help.png) no-repeat;
+}
+
+.help-img:hover {
+	background: url(../images/HelpHover.png) no-repeat;
+}
+
+.help-img:active {
+	background: url(../images/HelpClick.png) no-repeat;
+}
+
+#logoutDiv{
+
+}
+
+.logout-img {
+	height: 25px;
+	width: 23px;
+	margin-right: 22px;
+	margin-left: 0px !important;
+	background: url(../images/Logout.png) no-repeat;
+	float: right;
+}
+
+.logout-img:hover {
+	background: url(../images/LogoutHover.png) no-repeat;
+}
+
+.logout-img:active {
+	background: url(../images/LogoutClick.png) no-repeat;
+}
+
+.syschg-img {
+	height: 25px;
+	width: 23px;
+	margin-right: 10px;
+	margin-left: 0px !important;
+	background: url(../images/smallBtnQuery.png) no-repeat;
+	float: right;
+}
+.syschg-img:hover {
+	background: url(../images/smallBtnHover.png) no-repeat;
+}
+.syschg-img:active {
+	background: url(../images/smallBtnClick.png) no-repeat;
+}
+.syschg-img-text{
+	height: 25px;
+	width: 23px;
+	color:white;
+	position: absolute;
+    text-align: center;
+    padding-top: 5px;
+
+}
+
+.home-img {
+	height: 25px;
+	width: 23px;
+	background: url(../images/Home.png) no-repeat;
+	margin-right: 15px;
+}
+
+.home-img:hover {
+	background: url(../images/HomeHover.png) no-repeat;
+}
+
+.home-img:active {
+	background: url(../images/HomeClick.png) no-repeat;
+}
+
+.cut-line-span {
+	width: 0px;
+	height: 20px;
+	border-left: 1px solid #0967c7;
+	border-right: 1px solid #3293f4;
+	line-height: 27px;
+	margin: 0px;
+	display: inline-block;
+	float: left;
+	margin-top: 2px;
+}
+
+.shortcut-text-span {
+	float: left;
+	display: inline-block;
+	color: white;
+	font: 12px Microsoft YaHei;
+	height: 27px;
+	line-height: 25px;
+	vertical-align: middle;
+	margin-left: 20px;
+	cursor: default;
+}
+
+
+.user-welcome-span {
+	font-size: 12px;
+	color: white;
+	font: 12px Microsoft YaHei;
+	vertical-align: 50%;
+	float: left;
+	line-height: 27px;
+	margin-right: 15px;
+	cursor: default;
+}
+
+.menu-search-btn {
+	height: 25px;
+	width: 23px;
+	margin-left: 16px;
+	margin-top: 5px;
+	background: url(../images/MenuSearchBtn.png) no-repeat;
+}
+
+.menu-search-btn:hover {
+	background: url(../images/MenuSearchBtnHover.png) no-repeat;
+}
+
+.menu-search-btn:active {
+	background: url(../images/MenuSearchBtnClick.png) no-repeat;
+}
+
+.menu-collect-btn {
+	height: 25px;
+	width: 23px;
+	margin-left: 5px;
+	margin-top: 5px;
+	background: url(../images/MenuCollectBtn.png) no-repeat;
+}
+
+.menu-collect-btn:hover {
+	background: url(../images/MenuCollectBtnHover.png) no-repeat;
+}
+
+.menu-collect-btn:active {
+	background: url(../images/MenuCollectBtnClick.png) no-repeat;
+}
+/* 鏀惰棌澶圭鐞?  */
+#reNameFolderDiv .button-area,#addFolderDiv .button-area {
+	margin-top: 10px;
+	padding: 5px 0 5px 0;
+	text-align: center;
+	background-color: #ecedf1;
+	border-top: 1px solid #dfe0e5;
+}
+
+#reNameFolderDiv .input-area,#addFolderDiv .input-area {
+	width: 100%;
+	height: 50px;
+	margin-top: 10px;
+	padding-left: 15px;
+}
+
+
+#reNameFolderDiv .input-area .head,#addFolderDiv .input-area .head {
+	width: 30%;
+	text-align: right;
+}
+
+
+#reNameFolderDiv .input-area td input,#addFolderDiv .input-area td input {
+	background-color: #f7f8fa !important;
+	border-color: #c2c9cf !important;
+	border-width: 1px !important;
+	border-style: Solid !important;
+	height: 17px !important;
+	width: 70% !important;
+	padding: 2px !important;
+	border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+	line-height: 17px;
+}
+#reNameFolderDiv .input-area td input:focus,#addFolderDiv .input-area td input:focus {
+	border-color: #2e82ff !important;
+}
+
+
+div.jrzlSelectTree {
+	display: none;
+	padding: 5px 0 0 8px;
+}
+
+.jrzlSelectTree .leftTreeArea {
+	display: block;
+	background-color: white;
+	width: 230px;
+	height: 220px;
+	border: 1px solid #d0d0d0;
+	overflow-y: auto;
+}
+
+.jrzlSelectTree .rightTreeArea {
+	display: block;
+	background-color: white;
+	width: 230px;
+	height: 220px;
+	border: 1px solid #d0d0d0;
+	overflow-y: auto;
+}
+
+.jrzlSelectTree .tip-area {
+	margin: 5px 11px 10px 4px;
+	background-color: #F5F3E7;
+	border: 1px solid #B8BFB5;
+	padding: 8px 10px;
+}
+
+.jrzlSelectTree .tip-area span.tip-span {
+	display: block;
+	font-size: 12px !important;
+	line-height: 20px;
+}
+.jrzlSelectTree input[type="button"] {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	cursor: pointer !important;
+}
+
+.jrzlSelectTree div input[type="button"] {
+	text-align: right;
+	padding-right: 18px;
+}
+
+.jrzlSelectTree input.button-left {
+	background: url(../images/SelectTree-Left.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-left:hover {
+	background: url(../images/SelectTree-LeftHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-left:focus {
+	background: url(../images/SelectTree-LeftClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-remove {
+	background: url(../images/SelectTree-Remove.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-remove:hover {
+	background: url(../images/SelectTree-RemoveHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-remove:focus {
+	background: url(../images/SelectTree-RemoveClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-clear {
+	background: url(../images/SelectTree-Clear.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-clear:hover {
+	background: url(../images/SelectTree-ClearHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-clear:focus {
+	background: url(../images/SelectTree-ClearClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-top {
+	background: url(../images/SelectTree-Top.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-top:hover {
+	background: url(../images/SelectTree-TopHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-top:focus {
+	background: url(../images/SelectTree-TopClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-up {
+	background: url(../images/SelectTree-Up.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-up:hover {
+	background: url(../images/SelectTree-UpHover.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-up:focus {
+	background: url(../images/SelectTree-UpClick.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-down {
+	background: url(../images/SelectTree-Down.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-down:hover {
+	background: url(../images/SelectTree-DownHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-down:focus {
+	background: url(../images/SelectTree-DownClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-bottom {
+	background: url(../images/SelectTree-Bottom.png) no-repeat !important;
+}
+
+.jrzlSelectTree input.button-bottom:hover {
+	background: url(../images/SelectTree-BottomHover.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree input.button-bottom:focus {
+	background: url(../images/SelectTree-BottomClick.png) no-repeat
+		!important;
+}
+
+.jrzlSelectTree .common-button,
+#reNameFolderDiv .common-button,
+#addFolderDiv .common-button {
+	border-color: #c2c9cf !important;
+	border-width: 0px !important;
+	width: 85px !important;
+	height: 26px !important;
+	background: url(../images/ButtonNormal.png) no-repeat !important;
+	cursor: pointer !important;
+}
+
+.jrzlSelectTree .common-button:hover,
+#reNameFolderDiv .common-button:hover,
+#addFolderDiv .common-button:hover {
+	background: url(../images/ButtonNormalHover.png) no-repeat !important;
+}
+.jrzlSelectTree .common-button:focus,
+#reNameFolderDiv .common-button:focus,
+#addFolderDiv .common-button:focus {
+	background: url(../images/ButtonNormalClick.png) no-repeat !important;
+}
+/* 鏀惰棌澶圭鐞? end */
+
+
+.back-sysmenu-btn {
+	height: 25px;
+	width: 23px;
+	margin-left: 16px;
+	margin-top: 5px;
+	background: url(../images/BackSysMenu.png) no-repeat;
+}
+
+.back-sysmenu-btn:hover {
+	background: url(../images/BackSysMenuHover.png) no-repeat;
+}
+
+.back-sysmenu-btn:active {
+	background: url(../images/BackSysMenuClick.png) no-repeat;
+}
+
+.menu-search-box-left {
+	float: left;
+	background: url(../images/MenuSearchBoxLeft.png) no-repeat;
+	border: 0px;
+	height: 24px;
+	width: 6px;
+	margin-top: 6px;
+	outline: none;
+}
+
+.menu-search-box {
+	float: left;
+	text-indent: 2px;
+	background: url(../images/MenuSearchBox.png) repeat-x;
+	border: 0px;
+	height: 24px;
+	line-height: 24px;
+	width: 120px;
+	margin-top: 6px;
+	outline: none;
+}
+
+.menu-search {
+	background: url(../images/MenuSearch.png) no-repeat;
+	border: 0px;
+	height: 24px;
+	width: 26px;
+	outline: none;
+	margin-top: 6px;
+	float: left;
+}
+
+.menu-search:hover {
+	background-image: url('../images/MenuSearchHover.png');
+}
+
+.menu-search:active {
+	background-image: url('../images/MenuSearchClick.png');
+}
+
+.collect-manage-btn {
+	background: url(../images/CollectManageBtn.png) no-repeat;
+	border: 0px;
+	height: 24px;
+	width: 26px;
+	outline: none;
+	margin-top: 3px;
+	margin-left: 120px;
+	float: left;
+}
+
+.collect-manage-btn:hover {
+	background-image: url('../images/CollectManageBtnHover.png');
+}
+
+.collect-manage-btn:active {
+	background-image: url('../images/CollectManageBtnClick.png');
+}
+
+.old-system-img {
+	height: 52px;
+	width: 212px;
+	margin-left: 4px;
+	margin-top: 5px;
+	background: url(../images/OldSystem.png) no-repeat;
+	cursor: pointer;
+}
+
+.old-system-img:hover {
+	background: url(../images/OldSystemHover.png) no-repeat;
+}
+
+.old-system-img:active {
+	background: url(../images/OldSystemClick.png) no-repeat;
+}
+
+/*
+ * new task to remind the window begin
+ */
+#winpop {
+	background: url(../images/WinpopBg.png) no-repeat;
+	width: 227px;
+	position: fixed;
+	right: 0;
+	bottom: 5px;
+	height: 130px;
+}
+
+#winpop .title {
+	font-size: 12px;
+	margin-left: 35px;
+	line-height: 34px;
+	float: left;
+	margin-left: 35px;
+}
+
+#winpop .close {
+	float: right;
+	margin-right: 10px;
+	margin-top: 8px;
+	width: 14px;
+	height: 14px;
+	background: url(../images/Close.png) no-repeat;
+	cursor: pointer
+}
+
+#winpop .close:hover {
+	background: url(../images/CloseHover.png) no-repeat;
+}
+
+#winpop .tip {
+	font-size: 12px;
+	text-align: center;
+	margin-top: 40px;
+}
+
+#winpop .todo {
+	float: left;
+	align: center;
+	margin-left: 2px;
+	margin-top: 11px;
+	width: 216px;
+	height: 60px;
+}
+
+#winpop .todo-num {
+	font: 18px Microsoft YaHei;
+	color: #F64921;
+	text-align: center;
+	padding-top: 10px;
+	cursor: pointer;
+}
+
+#winpop .todo-label {
+	text-align: center;
+	padding-top: 5px;
+}
+
+#winpop .cc {
+	float: left;
+	align: center;
+	margin-top: 11px;
+	margin-left: 5px;
+	width: 107px;
+	height: 60px;
+}
+
+#winpop .cc-num {
+	font: 18px Microsoft YaHei;
+	color: #F64921;
+	text-align: center;
+	padding-top: 10px;
+	cursor: pointer;
+}
+
+#winpop .cc-label {
+	text-align: center;
+	padding-top: 5px;
+}
+/*
+ * new task to remind the window end
+ */
+
+.showDiv {
+	width: 160px;
+	background-color: #e2e5e9;
+	display: none;
+	position: fixed;
+	top: 81px;
+	right: 85px;
+	z-index: 1000;
+}
+
+.showMenu {
+	margin: 5px 5px;
+}
+
+.syschg-border-bottom {
+	border-bottom: #a5afb8 1px solid;
+}
+
+.syschglist {
+	height: 32px;
+	width: 100%;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.syschglist:hover {
+	cursor: pointer;
+}
+
+.syslistimg {
+	height: 25px;
+	width: 25px;
+	float:left;
+}
+
+.syschg-text {
+	height: 30px;
+	width: 120px;
+	margin-left: 5px;
+	line-height: 30px;
+	vertical-align: middle;
+	overflow:hidden;
+}
+
